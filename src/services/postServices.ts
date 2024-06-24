@@ -1,5 +1,5 @@
 import ITestPostData from "../constants/types";
-import http from "../http-common";
+import {http} from "../http-common";
 
 const getAll = () => {
   return http.get<Array<ITestPostData>>("/posts");
@@ -30,7 +30,7 @@ const findByTitle = (title: string) => {
 };
 
 const findWithLimit = (limit: number) => {
-    return http.get<Array<ITestPostData>>(`/posts?_limit=${limit}`);
+    return http.get<Array<ITestPostData>>(`/11posts?_limit=${limit}`);
   };
 
 const PostService
