@@ -1,4 +1,5 @@
-import ITestPostData from "../constants/types";
+
+import { ITestPostData } from "../constants/types";
 import {http} from "../http-common";
 
 const getAll = () => {

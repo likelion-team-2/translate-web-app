@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PostService from '../../services/postServices';
-import ITestPostData from '../../constants/types';
+import { ITestPostData } from '../../constants/types';
 
 interface ITestPageProps {
 }

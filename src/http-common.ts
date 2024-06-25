@@ -25,7 +25,7 @@ instance.interceptors.request.use(
 let refreshingFunc: any = undefined;
 instance.interceptors.response.use(
   (response) => {
-    console.log("---------response: ", response)
+    // console.log("---------response: ", response)
     if (response.status === 200) {
       return response;
     } else {
@@ -40,7 +40,7 @@ instance.interceptors.response.use(
     }
   },
   async (error) => {
-    console.log("---------error: ", error)
+    // console.log("---------error: ", error)
     const originalConfig = error.config;
     const token = localStorage.getItem(LS_ACCESS_TOKEN);
 
