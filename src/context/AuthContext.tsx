@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createContext, useContext } from "react";
 import { TUserLoginOutput } from "../constants/types";
-import { LS_ACCESS_TOKEN, LS_REFRESH_TOKEN, PAGE_LOGIN, PAGE_TEST } from "../constants/constant";
+import { LS_accessToken, LS_refreshToken, PAGE_LOGIN, PAGE_TEST } from "../constants/constant";
 import { useNavigate } from "react-router-dom";
 
 interface IAuthContext {
@@ -17,13 +17,13 @@ const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = React.useState<string>('');
   const navigate = useNavigate();
   React.useEffect(() => {
-    const localToken = localStorage.getItem(LS_ACCESS_TOKEN)
+    const localToken = localStorage.getItem(LS_accessToken)
     if (!userInfo && !localToken) {
       navigate(PAGE_LOGIN)
     } else {
       if (userInfo) {
         setToken(userInfo.accessToken)
-        localStorage.setItem(LS_ACCESS_TOKEN, userInfo.accessToken)
+        localStorage.setItem(LS_accessToken, userInfo.accessToken)
         navigate(PAGE_TEST)
       }
     }
@@ -31,8 +31,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const logout = () => {
     setUserInfo(null)
-    localStorage.removeItem(LS_ACCESS_TOKEN);
-    localStorage.removeItem(LS_REFRESH_TOKEN);
+    localStorage.removeItem(LS_accessToken);
+    localStorage.removeItem(LS_refreshToken);
     navigate(PAGE_LOGIN)
   }
 

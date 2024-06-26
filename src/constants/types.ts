@@ -21,6 +21,22 @@ export type TUserLoginOutput = {
   user: TUserInfo
 }
 
+export enum eRegisterError {
+  UserNameExited = 1,
+  UserNameHasAdmin = 2,
+  PassTooShort = 3,
+  PassHasAdmin = 4,
+  EmailExited = 5,
+}
+
+export type TUserCreateErrorOutput = {
+  errorCode: eRegisterError
+}
+
+export type TUserCreateOutput = {
+  status: boolean
+}
+
 export enum eRegion {
   VN = "Vietnam",
   KR = "Korea"
@@ -30,6 +46,6 @@ export type TUserCreateInput = {
   email: string
   username: string
   nickname: string
-  region: eRegion
+  region_country: eRegion
   password: string
 }

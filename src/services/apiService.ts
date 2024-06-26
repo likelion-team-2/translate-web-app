@@ -1,6 +1,6 @@
 import http from "../http-common";
-import { LS_REFRESH_TOKEN } from "../constants/constant";
-import { LS_ACCESS_TOKEN } from "../constants/constant";
+import { LS_refreshToken } from "../constants/constant";
+import { LS_accessToken } from "../constants/constant";
 
 function isUnauthorizedError(error: any) {
     const {
@@ -14,7 +14,7 @@ const get = (refreshToken: any) => {
 };
 
 async function renewToken() {
-    const refreshToken = localStorage.getItem(LS_REFRESH_TOKEN);
+    const refreshToken = localStorage.getItem(LS_refreshToken);
 
     if (!refreshToken)
         throw new Error('refresh token does not exist');
@@ -26,8 +26,8 @@ async function renewToken() {
     const response = await get(refreshPayload);
     const token = response.data.accessToken;
     const newRefreshToken = response.data.refreshToken;
-    localStorage.setItem(LS_REFRESH_TOKEN, newRefreshToken)
-    localStorage.setItem(LS_ACCESS_TOKEN, token)
+    localStorage.setItem(LS_refreshToken, newRefreshToken)
+    localStorage.setItem(LS_accessToken, token)
 
     return [token, newRefreshToken];
 }

@@ -10,6 +10,7 @@ import { TUserInfo, TUserLoginInput, TUserLoginOutput } from '../../../constants
 import { useNavigate } from 'react-router-dom';
 import TextInput from '../../../components/Input/TextInput';
 import { Body1 } from '../../../components/Text';
+import axios, { AxiosError } from 'axios';
 
 interface ILoginFormProps {
 }
@@ -43,10 +44,17 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
       identifier: userIdentifier,
       password: password,
     }
-    const result = await UserService.login(accountLogin)
-    if (result) {
-      authContext?.setUserInfo(result)
-      navigate(PAGE_DEFAULT)
+    try {
+
+      const result = await UserService.login(accountLogin)
+      if (result) {
+        authContext?.setUserInfo(result)
+        navigate(PAGE_DEFAULT)
+      }
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        console.log("login error: ", error)
+      }
     }
   }
 
@@ -66,14 +74,14 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
       <InputField title={LOGIN_USER_IDENTIFIER_TITLE} isError={isError} hasValue={hasUserIdentifierValue} onChangeValue={onChangeUserIdentifier} errorText={LOGIN_WRONG_USER_IDENTIFIER_TEXT} placeholder={LOGIN_USER_IDENTIFIER_PLACEHOLDER} />
       <PasswordInput title={LOGIN_PASSWORD_TITLE} hasValue={hasPasswordValue} onChangeValue={onChangePassword} placeholder={LOGIN_PASSWORD_PLACEHOLDER} />
       <div>
-        <Button className='w-full mt-[1.5rem] h-[4rem] rounded-[0px] bg-blue-Primary text-[22px] font-6 leading-[32px] !text-neutral-White rounded-[4px] disabled:bg-blue-shade' disabled={!(hasPasswordValue && hasUserIdentifierValue && password.length > PASSWORD_MIN_LENGTH)} onClick={onClick}>Đăng nhập</Button>
+        <Button className='w-full mt-[1.5rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] !text-neutral-White rounded-[4px] disabled:bg-blue-shade' disabled={!(hasPasswordValue && hasUserIdentifierValue && password.length > PASSWORD_MIN_LENGTH)} onClick={onClick}>Đăng nhập</Button>
       </div>
       <div className='w-full flex flex-row justify-center underline cursor-pointer text-blue-D30' onClick={onForget}>
         <Body1>Quên mật khẩu?</Body1>
       </div>
       <div className='w-full h-[2px] bg-blue-L30 mt-[24px]' />
       <div className='w-full flex flex-row justify-center'>
-        <Button className='w-[240px] mt-[1.5rem] h-[4rem] rounded-[0px] bg-turquoise-D30 text-[22px] font-6 leading-[32px] !text-neutral-White rounded-[4px]' onClick={onCreate}>Tạo tài khoản</Button>
+        <Button className='w-[240px] mt-[1.5rem] h-[4rem] bg-turquoise-D30 text-[22px] font-6 leading-[32px] !text-neutral-White rounded-[4px]' onClick={onCreate}>Tạo tài khoản</Button>
       </div>
     </div>
   </div>;
