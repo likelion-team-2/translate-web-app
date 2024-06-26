@@ -1,7 +1,6 @@
 import { SendOutlined } from "@ant-design/icons";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { Button, Col, Form, Input, Row } from "antd";
-import chatting from 'assets/bg.jpg';
 import ReactFacebookLogin from "react-facebook-login";
 import { Link } from "react-router-dom";
 
@@ -24,8 +23,8 @@ const LoginPage = () => {
     <div className="block-wrap">
       <Row className="width-100">
         <Col lg={12} sm={24}>
-          <div className="block-left">dsdsds
-            <img src={chatting} alt="" />
+          <div className="block-left">Login image
+            {/* <img src={chatting} alt="" /> */}
           </div>
         </Col>
         <Col lg={12} sm={24}>
