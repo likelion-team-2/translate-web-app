@@ -10,7 +10,7 @@ interface IBackground {
 }
 const Background: React.FC<IBackground> = ({ Element, title, subtitle }) => {
   return (
-    <div className="w-screen h-screen flex desktop:justify-between justify-start desktop:pr-[300px] desktop:py-[6rem] desktop:pl-[6rem] desktop:flex-row py-[1rem] px-[1rem] flex-col" style={{
+    <div className="w-full h-fit min-h-screen flex desktop:justify-between justify-start desktop:pr-[300px] desktop:py-[6rem] desktop:pl-[6rem] desktop:flex-row py-[1rem] px-[1rem] flex-col overflow-x-hidden" style={{
       backgroundImage: `url(${LOGIN_BG_IMAGE})`,
       backgroundSize: 'cover',
     }}>

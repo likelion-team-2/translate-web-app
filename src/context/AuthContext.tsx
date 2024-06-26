@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createContext, useContext } from "react";
 import { TUserLoginOutput } from "../constants/types";
-import { LS_accessToken, LS_refreshToken, PAGE_LOGIN, PAGE_TEST } from "../constants/constant";
+import { LS_accessToken, LS_refreshToken, PAGE_DEFAULT, PAGE_LOGIN } from "../constants/constant";
 import { useNavigate } from "react-router-dom";
 
 interface IAuthContext {
@@ -24,7 +24,7 @@ const AuthProvider: React.FC = ({ children }) => {
       if (userInfo) {
         setToken(userInfo.accessToken)
         localStorage.setItem(LS_accessToken, userInfo.accessToken)
-        navigate(PAGE_TEST)
+        navigate(PAGE_DEFAULT)
       }
     }
   }, [userInfo, localStorage]);

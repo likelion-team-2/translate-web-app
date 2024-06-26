@@ -11,10 +11,7 @@ interface ILoginPageProps {
 const LoginPage: React.FunctionComponent<ILoginPageProps> = ({ Element, title, subtitle }) => {
   
   return (
-    <div className="w-screen h-screen" style={{
-      backgroundImage: `url(${LOGIN_BG_IMAGE})`,
-      backgroundSize: 'cover',
-    }}>
+    <div>
       <Background Element={Element} title={title} subtitle={subtitle}/>
     </div>
   );

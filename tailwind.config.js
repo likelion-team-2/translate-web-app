@@ -2,6 +2,11 @@ module.exports = {
   mode: "jit",
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    screens: {
+      tabletVertical: "700px",
+      tabletHorizontal: "1142px",
+      desktop: "1366px",
+    },
     extend: {
       boxShadow: {
         DEFAULT: "0px 4px 16px rgba(126, 129, 138, 0.1)",
