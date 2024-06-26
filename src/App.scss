@@ -51,15 +51,15 @@ a:hover {
   align-items: center;
 }
 
-.password > input {
+.password>input {
   background-color: rgb(244 244 245);
 }
 
-.input-password > .ant-input-suffix {
+.input-password>.ant-input-suffix {
   display: none;
 }
 
-.confirm-otp > .ant-input {
+.confirm-otp>.ant-input {
   height: 88px;
   max-width: none;
   border-radius: 0;
@@ -74,13 +74,107 @@ a:hover {
   background-color: white !important;
 }
 
-.otp-done > .ant-input {
+.otp-done>.ant-input {
   background-color: #E4F7EA !important;
   border-color: #11CE52 !important;
 }
 
-.otp-failed > .ant-input {
+.otp-failed>.ant-input {
   background-color: white !important;
   border-color: #F03F3F !important;
   color: #F03F3F !important;
+}
+
+//////////////////////////////////
+.kep-login-facebook {
+  background-color: #4267B2;
+  /* Màu xanh đặc trưng của Facebook */
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kep-login-facebook:hover {
+  background-color: #365899;
+}
+
+.kep-login-facebook i {
+  margin-right: 10px;
+}
+
+.login-block {
+  overflow: hidden;
+  background-image: url('../public/assets/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .block-wrap {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    min-height: 80vh;
+    background-color: #ffffff5d;
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+
+    .text-guide {
+      color: #fff;
+    }
+
+    .block-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: #000000c0;
+      height: 100%;
+      position: relative;
+
+      animation-name: my-animation;
+      animation-duration: 2s;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+
+    }
+  }
+
+  .ant-input {
+    border: none;
+    min-height: 40px;
+    background: #fff6;
+    color: #fff;
+  }
+
+  .ant-form-item-label {
+    label {
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+}
+
+.width-100 {
+  width: 100%;
+}
+
+@keyframes my-animation {
+  from {
+    top: -10px;
+  }
+
+  to {
+    top: 10px;
+  }
 }

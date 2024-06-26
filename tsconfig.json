@@ -18,9 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"],
+      "assets/*": ["./public/assets/*"]
+    }
   },
-  "include": [
-    "src"
-, "components"  ]
+  "include": ["src", "components", "tsconfig.paths.json"  ]
 }

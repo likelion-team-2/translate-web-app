@@ -1,6 +1,7 @@
 import { RouteObject, useRoutes } from "react-router-dom";
 import "./App.less";
 import AuthProvider from "./context/AuthContext";
+import LoginPage from "./pages/login/Login";
 import TestPage from "./pages/test";
 
 export default function App() {
@@ -11,6 +12,11 @@ export default function App() {
           path: "/test",
           index: true,
           element: <TestPage />,
+        },
+        {
+          path: "/login",
+          index: true,
+          element: <LoginPage />,
         },
       ],
     },
@@ -28,7 +34,7 @@ export default function App() {
   let element = useRoutes(routes);
   return <>
     <AuthProvider>
-        {element}
+      {element}
     </AuthProvider>
   </>;
 }
