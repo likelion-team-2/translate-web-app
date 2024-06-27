@@ -6,7 +6,8 @@ import { PAGE_TEST, PAGE_LOGIN, LOGIN_TITLE, LOGIN_SUBTITLE, PAGE_REGISTER, REGI
 import LoginPage from "./pages/user";
 import LoginForm from "./pages/user/login";
 import RegisterForm from "./pages/user/register";
-import ChatFrame from "./pages/user/chat";
+import ChatFrame from "./pages/chat";
+import Layout from "./components/common/Layout/Layout";
 
 export default function App() {
   let routes: RouteObject[] = [
@@ -16,7 +17,11 @@ export default function App() {
     },
     {
       path: PAGE_DEFAULT,
-      element: <ChatFrame />,
+      element:
+        <Layout>
+          <ChatFrame />
+        </Layout>
+      ,
     },
     {
       path: PAGE_LOGIN,

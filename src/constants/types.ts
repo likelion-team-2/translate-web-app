@@ -49,3 +49,17 @@ export type TUserCreateInput = {
   region_country: eRegion
   password: string
 }
+
+export interface IIconProps {
+  color?: string
+  width?: number
+  height?: number
+}
+
+export type TUser = {
+  id: string
+  email: string
+  username: string
+  nickname: string
+  region_country: eRegion
+}

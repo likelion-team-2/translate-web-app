@@ -19,7 +19,7 @@ const AuthProvider: React.FC = ({ children }) => {
   React.useEffect(() => {
     const localToken = localStorage.getItem(LS_accessToken)
     if (!userInfo && !localToken) {
-      navigate(PAGE_LOGIN)
+      // navigate(PAGE_LOGIN)
     } else {
       if (userInfo) {
         setToken(userInfo.accessToken)

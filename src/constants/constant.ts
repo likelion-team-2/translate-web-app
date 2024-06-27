@@ -1,3 +1,6 @@
+import { randomColor } from "../utils/helper"
+import { TUser, eRegion } from "./types"
+
 export const API_URL = "https://jsonplaceholder.typicode.com"
 export const LS_accessToken = "@accessToken"
 export const LS_refreshToken = "@refreshToken"
@@ -8,7 +11,9 @@ export const PAGE_DEFAULT = "/*"
 export const LOGIN_TITLE = 'Đăng nhập'
 export const LOGIN_SUBTITLE = 'Vui lòng đăng nhập để tiếp tục'
 export const LOGIN_BG_IMAGE = '/LoginPage.jpg'
-export const LOGO_IMAGE = '/Logo.png'
+export const LOGO_IMAGE_BLACK = '/LogoBlack.png'
+export const LOGO_IMAGE_WHITE = '/LogoWhite.png'
+export const THRESH_NO_CONTENT_IMG = '/NoContentImg.png'
 export const LOGIN_USER_IDENTIFIER_TITLE = 'Tên đăng nhập'
 export const LOGIN_USER_IDENTIFIER_PLACEHOLDER = 'Email hoặc Username'
 export const LOGIN_PASSWORD_PLACEHOLDER = 'Mật khẩu'
@@ -44,3 +49,49 @@ export const REGISTER_WRONG_CONFIRM_PASS_TEXT = 'Mật khẩu không trùng kh�
 export const REGISTER_REGION_TITLE = 'Khu vực'
 export const RESP_STATUS_CODE_WRONG_API = 404
 export const RESP_STATUS_CODE_USER_ERROR = 409
+export const DEFAULT_USER_COLOR = randomColor()
+
+export const FAKE_LIST_USER: TUser[] = [
+    {
+        id: "id1",
+        email: "1@gmail.com",
+        nickname: "nickname1",
+        region_country: eRegion.VN,
+        username: "username1"
+    },
+    {
+        id: "id2",
+        email: "2@gmail.com",
+        nickname: "nickname2",
+        region_country: eRegion.VN,
+        username: "username2"
+    },
+    {
+        id: "id3",
+        email: "3@gmail.com",
+        nickname: "nickname3",
+        region_country: eRegion.VN,
+        username: "username3"
+    },
+    {
+        id: "id4",
+        email: "4@gmail.com",
+        nickname: "nickname4",
+        region_country: eRegion.KR,
+        username: "username4"
+    },
+    {
+        id: "id5",
+        email: "5@gmail.com",
+        nickname: "nickname5",
+        region_country: eRegion.KR,
+        username: "username5"
+    },
+    {
+        id: "id6",
+        email: "6@gmail.com",
+        nickname: "nickname6",
+        region_country: eRegion.KR,
+        username: "username6"
+    }
+]

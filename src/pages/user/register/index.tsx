@@ -152,10 +152,11 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
             onChange={onChange}
             // onSearch={onSearch}
             options={regions}
+            className='mt-[0.5rem] h-[3rem]'
           />
         </div>
         <div>
-          <Button className='w-full mt-[1.5rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] !text-neutral-White rounded-[4px] disabled:bg-blue-shade' disabled={!isRegisterable} onClick={onRegister}>Đăng ký</Button>
+          <Button className='w-full mt-[1rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] !text-neutral-White rounded-[4px] disabled:bg-blue-shade' disabled={!isRegisterable} onClick={onRegister}>Đăng ký</Button>
         </div>
       </div>
     </div>

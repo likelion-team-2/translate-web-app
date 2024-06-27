@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LOGIN_BG_IMAGE, LOGO_IMAGE } from "../../../constants/constant";
+import { LOGIN_BG_IMAGE, LOGO_IMAGE_BLACK } from "../../../constants/constant";
 import LoginBodyS from "../../../components/Text/LoginBodyS";
 import LoginHeading from "../../../components/Text/LoginHeading";
 
@@ -15,7 +15,7 @@ const Background: React.FC<IBackground> = ({ Element, title, subtitle }) => {
       backgroundSize: 'cover',
     }}>
       <div className="w-[200px] h-fit">
-        <img src={LOGO_IMAGE} alt="logo"/>
+        <img src={LOGO_IMAGE_BLACK} alt="logo"/>
       </div>
       <div className="h-fit bg-neutral-White flex flex-col desktop:mt-0 desktop:w-[659px] desktop:p-[2rem] mt-[3rem] w-full p-4">
         <LoginHeading>{title}</LoginHeading>
