@@ -147,7 +147,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
           <LoginTitleS>{REGISTER_REGION_TITLE}</LoginTitleS>
           <Select
             showSearch
-            placeholder={"Chọn " + REGISTER_REGION_TITLE}
+            placeholder={"Choose " + REGISTER_REGION_TITLE}
             optionFilterProp="label"
             onChange={onChange}
             // onSearch={onSearch}

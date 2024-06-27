@@ -74,14 +74,14 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
       <InputField title={LOGIN_USER_IDENTIFIER_TITLE} isError={isError} hasValue={hasUserIdentifierValue} onChangeValue={onChangeUserIdentifier} errorText={LOGIN_WRONG_USER_IDENTIFIER_TEXT} placeholder={LOGIN_USER_IDENTIFIER_PLACEHOLDER} />
       <PasswordInput title={LOGIN_PASSWORD_TITLE} hasValue={hasPasswordValue} onChangeValue={onChangePassword} placeholder={LOGIN_PASSWORD_PLACEHOLDER} />
       <div>
-        <Button className='w-full mt-[1.5rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px] disabled:bg-blue-shade disabled:text-neutral-White' disabled={!(hasPasswordValue && hasUserIdentifierValue && password.length > PASSWORD_MIN_LENGTH)} onClick={onClick}>Đăng nhập</Button>
+        <Button className='w-full mt-[1.5rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px] disabled:bg-blue-shade disabled:text-neutral-White' disabled={!(hasPasswordValue && hasUserIdentifierValue && password.length > PASSWORD_MIN_LENGTH)} onClick={onClick}>Log in</Button>
       </div>
       <div className='w-full flex flex-row justify-center underline cursor-pointer text-blue-D30' onClick={onForget}>
-        <Body1>Quên mật khẩu?</Body1>
+        <Body1>Forget password?</Body1>
       </div>
       <div className='w-full h-[2px] bg-blue-L30 mt-[24px]' />
       <div className='w-full flex flex-row justify-center'>
-        <Button className='w-[240px] mt-[1.5rem] h-[4rem] bg-turquoise-D30 text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px]' onClick={onCreate}>Tạo tài khoản</Button>
+        <Button className='w-[240px] mt-[1.5rem] h-[4rem] bg-turquoise-D30 text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px]' onClick={onCreate}>Create new account</Button>
       </div>
     </div>
   </div>;
