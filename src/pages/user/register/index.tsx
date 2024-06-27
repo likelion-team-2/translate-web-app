@@ -58,7 +58,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
       username,
       nickname,
       password,
-      region_country: region,
+      regionCountry: region,
     }
     try {
       const result = await UserService.create(accountCreate)
@@ -146,11 +146,9 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
         <div>
           <LoginTitleS>{REGISTER_REGION_TITLE}</LoginTitleS>
           <Select
-            showSearch
             placeholder={"Choose " + REGISTER_REGION_TITLE}
             optionFilterProp="label"
             onChange={onChange}
-            // onSearch={onSearch}
             options={regions}
             className='mt-[0.5rem] h-[3rem]'
           />

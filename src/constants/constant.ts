@@ -57,42 +57,42 @@ export const FAKE_LIST_USER: TUser[] = [
         id: "id1",
         email: "1@gmail.com",
         nickname: "nickname1",
-        region_country: eRegion.VN,
+        regionCountry: eRegion.VN,
         username: "username1"
     },
     {
         id: "id2",
         email: "2@gmail.com",
         nickname: "nickname2",
-        region_country: eRegion.VN,
+        regionCountry: eRegion.VN,
         username: "username2"
     },
     {
         id: "id3",
         email: "3@gmail.com",
         nickname: "nickname3",
-        region_country: eRegion.VN,
+        regionCountry: eRegion.VN,
         username: "username3"
     },
     {
         id: "id4",
         email: "4@gmail.com",
         nickname: "nickname4",
-        region_country: eRegion.KR,
+        regionCountry: eRegion.KR,
         username: "username4"
     },
     {
         id: "id5",
         email: "5@gmail.com",
         nickname: "nickname5",
-        region_country: eRegion.KR,
+        regionCountry: eRegion.KR,
         username: "username5"
     },
     {
         id: "id6",
         email: "6@gmail.com",
         nickname: "nickname6",
-        region_country: eRegion.KR,
+        regionCountry: eRegion.KR,
         username: "username6"
     }
 ]

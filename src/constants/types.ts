@@ -42,11 +42,19 @@ export enum eRegion {
   KR = "Korea"
 }
 
+export type TUserUpdateInput = {
+  email: string
+  username: string
+  nickname: string
+  regionCountry: eRegion
+}
+
+
 export type TUserCreateInput = {
   email: string
   username: string
   nickname: string
-  region_country: eRegion
+  regionCountry: eRegion
   password: string
 }
 
@@ -61,5 +69,5 @@ export type TUser = {
   email: string
   username: string
   nickname: string
-  region_country: eRegion
+  regionCountry: eRegion
 }
