@@ -1,6 +1,7 @@
 import http from "../http-common";
 import { LS_refreshToken } from "../constants/constant";
 import { LS_accessToken } from "../constants/constant";
+import { TRefreshTokenInput, TRefreshTokenOutput } from "../constants/types";
 
 function isUnauthorizedError(error: any) {
     const {
@@ -9,8 +10,8 @@ function isUnauthorizedError(error: any) {
     return status === 401;
 }
 
-const get = (refreshToken: any) => {
-    return http.get<{ refreshToken: string, accessToken: string }>(`/refreshToken/${refreshToken}`);
+const refreshToken = (input: TRefreshTokenInput) => {
+    return http.post<TRefreshTokenInput, TRefreshTokenOutput>(`/v1/api/auth/refreshToken`, refreshToken);
 };
 
 async function renewToken() {
@@ -19,11 +20,11 @@ async function renewToken() {
     if (!refreshToken)
         throw new Error('refresh token does not exist');
 
-    const refreshPayload = {
+    const refreshPayload: TRefreshTokenInput = {
         refreshToken: refreshToken
     };
 
-    const response = await get(refreshPayload);
+    const response = await ApiService.refreshToken(refreshPayload);
     const token = response.data.accessToken;
     const newRefreshToken = response.data.refreshToken;
     localStorage.setItem(LS_refreshToken, newRefreshToken)
@@ -35,7 +36,7 @@ async function renewToken() {
 const ApiService
     = {
     renewToken,
-    get,
+    refreshToken,
     isUnauthorizedError,
 };
 

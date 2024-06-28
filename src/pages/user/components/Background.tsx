@@ -17,7 +17,7 @@ const Background: React.FC<IBackground> = ({ Element, title, subtitle }) => {
       <div className="w-[200px] h-fit">
         <img src={LOGO_IMAGE_BLACK} alt="logo"/>
       </div>
-      <div className="h-fit bg-neutral-White flex flex-col desktop:mt-0 desktop:w-[659px] desktop:p-[2rem] mt-[3rem] w-full p-4">
+      <div className="h-fit bg-neutral-White flex flex-col desktop:mt-0 desktop:w-[659px] desktop:p-[2rem] mt-[3rem] w-full p-4 rounded-[8px]">
         <LoginHeading>{title}</LoginHeading>
         <LoginBodyS className="mt-[0.5rem] text-neutral-D01">{subtitle}</LoginBodyS>
         <Element />

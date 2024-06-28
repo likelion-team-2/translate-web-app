@@ -2,7 +2,7 @@ import { RouteObject, useRoutes } from "react-router-dom";
 import "./App.less";
 import AuthProvider from "./context/AuthContext";
 import TestPage from "./pages/test";
-import { PAGE_TEST, PAGE_LOGIN, LOGIN_TITLE, LOGIN_SUBTITLE, PAGE_REGISTER, REGISTER_SUBTITLE, REGISTER_TITLE, PAGE_DEFAULT } from "./constants/constant";
+import { PAGE_TEST, PAGE_SIGN_IN, LOGIN_TITLE, LOGIN_SUBTITLE, PAGE_SIGN_UP, REGISTER_SUBTITLE, REGISTER_TITLE, PAGE_DEFAULT } from "./constants/constant";
 import LoginPage from "./pages/user";
 import LoginForm from "./pages/user/login";
 import RegisterForm from "./pages/user/register";
@@ -24,11 +24,11 @@ export default function App() {
       ,
     },
     {
-      path: PAGE_LOGIN,
+      path: PAGE_SIGN_IN,
       element: <LoginPage Element={LoginForm} title={LOGIN_TITLE} subtitle={LOGIN_SUBTITLE} />,
     },
     {
-      path: PAGE_REGISTER,
+      path: PAGE_SIGN_UP,
       element: <LoginPage Element={RegisterForm} title={REGISTER_TITLE} subtitle={REGISTER_SUBTITLE} />,
     },
   ];

@@ -1,6 +1,6 @@
 import { Button, Dropdown, Select } from 'antd';
 import * as React from 'react';
-import { PAGE_DEFAULT, PAGE_LOGIN, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_EMAIL_PLACEHOLDER, REGISTER_EMAIL_TITLE, REGISTER_EXISTED_EMAIL_TEXT, REGISTER_NICKNAME_PLACEHOLDER, REGISTER_NICKNAME_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_REGION_TITLE, REGISTER_USERNAME_PLACEHOLDER, REGISTER_USERNAME_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, REGISTER_WRONG_EMAIL_TEXT, REGISTER_WRONG_NICKNAME_TEXT, REGISTER_WRONG_USERNAME_TEXT, RESP_STATUS_CODE_USER_ERROR, SPECIAL_CHARACTERS } from '../../../constants/constant';
+import { PAGE_DEFAULT, PAGE_SIGN_IN, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_EMAIL_PLACEHOLDER, REGISTER_EMAIL_TITLE, REGISTER_EXISTED_EMAIL_TEXT, REGISTER_NICKNAME_PLACEHOLDER, REGISTER_NICKNAME_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_REGION_TITLE, REGISTER_USERNAME_PLACEHOLDER, REGISTER_USERNAME_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, REGISTER_WRONG_EMAIL_TEXT, REGISTER_WRONG_NICKNAME_TEXT, REGISTER_WRONG_USERNAME_TEXT, RESP_STATUS_CODE_USER_ERROR, SPECIAL_CHARACTERS } from '../../../constants/constant';
 import InputField from '../components/InputField';
 import PasswordInput from '../components/PasswordInput';
 import CheckItem from '../components/CheckItem';
@@ -9,7 +9,7 @@ import LoginBodyS from '../../../components/Text/LoginBodyS';
 import UserService from '../../../services/userServices';
 import { TUserCreateInput, eRegion, eRegisterError } from '../../../constants/types';
 import { validateEmail } from '../../../utils/helper';
-import { Body1 } from '../../../components/Text';
+import { Body1, Body3 } from '../../../components/Text';
 import { useAuth } from '../../../context/AuthContext';
 import LoginTitleS from '../../../components/Text/LoginTitleS';
 import { useNavigate } from 'react-router-dom';
@@ -64,7 +64,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
       const result = await UserService.create(accountCreate)
       if (result.status) {
         // authContext?.setUserInfo(result)
-        navigate(PAGE_LOGIN)
+        navigate(PAGE_SIGN_IN)
       }
     } catch (error: any | AxiosError) {
       setIsRegisterable(false)
@@ -151,6 +151,10 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
             onChange={onChange}
             options={regions}
             className='mt-[0.5rem] h-[3rem]'
+            labelRender={(i) => {
+              return <Body3 className='text-[18px]'>{i.value}</Body3>
+            }}
+            size='large'
           />
         </div>
         <div>

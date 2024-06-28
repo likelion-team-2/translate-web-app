@@ -1,5 +1,5 @@
 import axios, { AxiosRequestHeaders } from "axios";
-import { API_URL, LS_accessToken, LS_refreshToken, PAGE_LOGIN } from "./constants/constant";
+import { API_URL, LS_accessToken, LS_refreshToken, PAGE_SIGN_IN } from "./constants/constant";
 import qs from "qs"
 import ApiService from "./services/apiService";
 
@@ -74,7 +74,7 @@ instance.interceptors.response.use(
       localStorage.removeItem(LS_accessToken);
       localStorage.removeItem(LS_refreshToken);
 
-      window.location.href = PAGE_LOGIN
+      window.location.href = PAGE_SIGN_IN
 
     } finally {
       refreshingFunc = undefined;

@@ -1,25 +1,25 @@
 import * as React from "react";
 import { createContext, useContext } from "react";
-import { TUserLoginOutput } from "../constants/types";
-import { LS_accessToken, LS_refreshToken, PAGE_DEFAULT, PAGE_LOGIN } from "../constants/constant";
+import { TUserInfo, TUserLogin, TUserLoginOutput } from "../constants/types";
+import { LS_accessToken, LS_refreshToken, PAGE_DEFAULT, PAGE_SIGN_IN } from "../constants/constant";
 import { useNavigate } from "react-router-dom";
 
 interface IAuthContext {
-  userInfo: TUserLoginOutput | null;
-  setUserInfo: React.Dispatch<React.SetStateAction<TUserLoginOutput | null>>;
+  userInfo: TUserLogin | null;
+  setUserInfo: React.Dispatch<React.SetStateAction<TUserLogin | null>>;
   token: string;
   logout: () => void
 }
 export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [userInfo, setUserInfo] = React.useState<TUserLoginOutput | null>(null);
+  const [userInfo, setUserInfo] = React.useState<TUserLogin | null>(null);
   const [token, setToken] = React.useState<string>('');
   const navigate = useNavigate();
   React.useEffect(() => {
     const localToken = localStorage.getItem(LS_accessToken)
     if (!userInfo && !localToken) {
-      // navigate(PAGE_LOGIN)
+      // navigate(PAGE_SIGN_IN)
     } else {
       if (userInfo) {
         setToken(userInfo.accessToken)
@@ -33,7 +33,7 @@ const AuthProvider: React.FC = ({ children }) => {
     setUserInfo(null)
     localStorage.removeItem(LS_accessToken);
     localStorage.removeItem(LS_refreshToken);
-    navigate(PAGE_LOGIN)
+    navigate(PAGE_SIGN_IN)
   }
 
   return (

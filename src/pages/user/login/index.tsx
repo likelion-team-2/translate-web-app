@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Button, Modal } from 'antd';
-import { useMutation } from '@apollo/client';
 import InputField from '../components/InputField';
 import PasswordInput from '../components/PasswordInput';
-import { LOGIN_USER_IDENTIFIER_TITLE, LOGIN_WRONG_USER_IDENTIFIER_TEXT, LOGIN_PASSWORD_TITLE, PASSWORD_MIN_LENGTH, LOGIN_USER_IDENTIFIER_PLACEHOLDER, LOGIN_PASSWORD_PLACEHOLDER, PAGE_REGISTER, FORGET_PASS_MODAL_TITLE, FORGET_PASS_MODAL_CONTENT, PAGE_DEFAULT } from '../../../constants/constant';
+import { LOGIN_USER_IDENTIFIER_TITLE, LOGIN_WRONG_USER_IDENTIFIER_TEXT, LOGIN_PASSWORD_TITLE, PASSWORD_MIN_LENGTH, LOGIN_USER_IDENTIFIER_PLACEHOLDER, LOGIN_PASSWORD_PLACEHOLDER, FORGET_PASS_MODAL_TITLE, FORGET_PASS_MODAL_CONTENT, PAGE_DEFAULT, PAGE_SIGN_UP } from '../../../constants/constant';
 import { useAuth } from '../../../context/AuthContext';
 import UserService from '../../../services/userServices';
-import { TUserInfo, TUserLoginInput, TUserLoginOutput } from '../../../constants/types';
+import { TUserLoginInput } from '../../../constants/types';
 import { useNavigate } from 'react-router-dom';
-import TextInput from '../../../components/Input/TextInput';
 import { Body1 } from '../../../components/Text';
 import axios, { AxiosError } from 'axios';
 
@@ -41,14 +39,14 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
   const onClick = async () => {
     setIsError(false);
     const accountLogin: TUserLoginInput = {
-      identifier: userIdentifier,
+      usernameOrEmail: userIdentifier,
       password: password,
     }
     try {
 
       const result = await UserService.login(accountLogin)
       if (result) {
-        authContext?.setUserInfo(result)
+        authContext?.setUserInfo(result.data)
         navigate(PAGE_DEFAULT)
       }
     } catch (error: any | AxiosError) {
@@ -60,7 +58,7 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
 
   const navigate = useNavigate();
   const onCreate = () => {
-    navigate(PAGE_REGISTER)
+    navigate(PAGE_SIGN_UP)
   }
 
   const onForget = () => {

@@ -4,8 +4,8 @@ import { TUser, eRegion } from "./types"
 export const API_URL = "https://jsonplaceholder.typicode.com"
 export const LS_accessToken = "@accessToken"
 export const LS_refreshToken = "@refreshToken"
-export const PAGE_REGISTER = "/register"
-export const PAGE_LOGIN = "/login"
+export const PAGE_SIGN_UP = "/signup"
+export const PAGE_SIGN_IN = "/signin"
 export const PAGE_TEST = "/test"
 export const PAGE_DEFAULT = "/*"
 export const LOGIN_TITLE = 'Log in'
@@ -46,11 +46,13 @@ export const REGISTER_WRONG_PASS_TEXT = 'Incorrect password. Please try again.'
 export const REGISTER_CONFIRM_PASS_TITLE = 'Confirm password'
 export const REGISTER_CONFIRM_PASS_PLACEHOLDER = 'Password'
 export const REGISTER_WRONG_CONFIRM_PASS_TEXT = 'Confirm password is not match. Please try again.'
+export const CHANGE_PW_WRONG_PASS_TEXT = 'Incorrect password. Please try again.'
 export const REGISTER_REGION_TITLE = 'Region'
 export const RESP_STATUS_CODE_WRONG_API = 404
 export const RESP_STATUS_CODE_USER_ERROR = 409
 export const DEFAULT_USER_COLOR = randomColor()
 export const PROFILE_MODAL_TITLE = 'User profile'
+export const CHANGE_PW_MODAL_TITLE = 'Change password'
 
 export const FAKE_LIST_USER: TUser[] = [
     {

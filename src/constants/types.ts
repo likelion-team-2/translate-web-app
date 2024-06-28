@@ -6,19 +6,38 @@ export interface ITestPostData {
 }
 
 export type TUserInfo = {
-  username: string
   email: string
+  username: string
+  nickname: string
+  regionCountry: eRegion
+}
+
+export type TRefreshTokenInput = {
+  refreshToken: string
+}
+
+export type TRefreshToken = {
+  accessToken: string
+  refreshToken: string
+}
+
+export type TRefreshTokenOutput = {
+  data: TRefreshToken
 }
 
 export type TUserLoginInput = {
-  identifier: string
+  usernameOrEmail: string
   password: string
 }
 
-export type TUserLoginOutput = {
+export type TUserLogin= {
   accessToken: string
   refreshToken: string
   user: TUserInfo
+}
+
+export type TUserLoginOutput = {
+  data: TUserLogin
 }
 
 export enum eRegisterError {
@@ -49,6 +68,9 @@ export type TUserUpdateInput = {
   regionCountry: eRegion
 }
 
+export type TUserChangePassInput = {
+  password: string
+}
 
 export type TUserCreateInput = {
   email: string

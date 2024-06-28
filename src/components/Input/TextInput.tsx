@@ -13,7 +13,7 @@ const TextInput: React.FunctionComponent<ITextInputProps> = ({ onValueChange, ha
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
         onValueChange(e.currentTarget.value)
     }
-    return <Input type={type} className={`w-full h-[4rem] ${hasValue ? 'border-b-blue-Primary !border-x-0 border-t-0 border-b-[1px] bg-neutral-White' : 'border-neutral-D00 border-[1px] bg-grey-bg hover:border-neutral-D00 focus:border-neutral-D00'}  rounded-[0px] text-[22px] font-5 leading-[32px]  focus:shadow-none`} onChange={onChange} placeholder={placeholder} disabled={isDisabled}/>;
+    return <Input type={type} className={`w-full h-[4rem] ${hasValue ? 'border-b-blue-Primary !border-x-0 border-t-0 border-b-[1px] bg-neutral-White' : 'border-neutral-D00 border-[1px] bg-grey-bg hover:border-neutral-D00 focus:border-neutral-D00'}  text-[22px] font-5 leading-[32px]  focus:shadow-none rounded-[4px]`} onChange={onChange} placeholder={placeholder} disabled={isDisabled}/>;
 };
 
 export default TextInput;
