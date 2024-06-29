@@ -1,7 +1,8 @@
 import http from "../http-common";
-import { LS_refreshToken } from "../constants/constant";
-import { LS_accessToken } from "../constants/constant";
-import { TRefreshTokenInput, TRefreshTokenOutput } from "../constants/types";
+import { LS_REFRESH_TOKEN, PAGE_SIGN_IN } from "../constants/constant";
+import { LS_ACCESS_TOKEN } from "../constants/constant";
+import { TRefreshTokenInput, TRefreshTokenOutput, eRefreshTokenError, eRegisterError } from "../constants/types";
+import axios, { HttpStatusCode } from "axios";
 
 function isUnauthorizedError(error: any) {
     const {
@@ -15,7 +16,7 @@ const refreshToken = (input: TRefreshTokenInput) => {
 };
 
 async function renewToken() {
-    const refreshToken = localStorage.getItem(LS_refreshToken);
+    const refreshToken = localStorage.getItem(LS_REFRESH_TOKEN);
 
     if (!refreshToken)
         throw new Error('refresh token does not exist');
@@ -24,11 +25,21 @@ async function renewToken() {
         refreshToken: refreshToken
     };
 
-    const response = await ApiService.refreshToken(refreshPayload);
-    const token = response.data.accessToken;
-    const newRefreshToken = response.data.refreshToken;
-    localStorage.setItem(LS_refreshToken, newRefreshToken)
-    localStorage.setItem(LS_accessToken, token)
+    let token = ""
+    let newRefreshToken = ""
+    try {
+        const response = await ApiService.refreshToken(refreshPayload);
+        token = response.data.accessToken;
+        newRefreshToken = response.data.refreshToken;
+        localStorage.setItem(LS_REFRESH_TOKEN, newRefreshToken)
+        localStorage.setItem(LS_ACCESS_TOKEN, token)
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.response?.status === HttpStatusCode.Unauthorized) {
+                return Promise.reject("Failed to refresh token!")
+            }
+        }
+    }
 
     return [token, newRefreshToken];
 }

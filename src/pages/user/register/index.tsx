@@ -1,6 +1,6 @@
-import { Button, Dropdown, Select } from 'antd';
+import { Button, Select } from 'antd';
 import * as React from 'react';
-import { PAGE_DEFAULT, PAGE_SIGN_IN, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_EMAIL_PLACEHOLDER, REGISTER_EMAIL_TITLE, REGISTER_EXISTED_EMAIL_TEXT, REGISTER_NICKNAME_PLACEHOLDER, REGISTER_NICKNAME_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_REGION_TITLE, REGISTER_USERNAME_PLACEHOLDER, REGISTER_USERNAME_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, REGISTER_WRONG_EMAIL_TEXT, REGISTER_WRONG_NICKNAME_TEXT, REGISTER_WRONG_USERNAME_TEXT, RESP_STATUS_CODE_USER_ERROR, SPECIAL_CHARACTERS } from '../../../constants/constant';
+import { PAGE_SIGN_IN, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_EMAIL_PLACEHOLDER, REGISTER_EMAIL_TITLE, REGISTER_EXISTED_EMAIL_TEXT, REGISTER_NICKNAME_PLACEHOLDER, REGISTER_NICKNAME_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_REGION_TITLE, REGISTER_USERNAME_PLACEHOLDER, REGISTER_USERNAME_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, REGISTER_WRONG_EMAIL_TEXT, REGISTER_WRONG_NICKNAME_TEXT, REGISTER_WRONG_USERNAME_TEXT, SPECIAL_CHARACTERS } from '../../../constants/constant';
 import InputField from '../components/InputField';
 import PasswordInput from '../components/PasswordInput';
 import CheckItem from '../components/CheckItem';
@@ -9,11 +9,10 @@ import LoginBodyS from '../../../components/Text/LoginBodyS';
 import UserService from '../../../services/userServices';
 import { TUserCreateInput, eRegion, eRegisterError } from '../../../constants/types';
 import { validateEmail } from '../../../utils/helper';
-import { Body1, Body3 } from '../../../components/Text';
-import { useAuth } from '../../../context/AuthContext';
+import { Body3 } from '../../../components/Text';
 import LoginTitleS from '../../../components/Text/LoginTitleS';
 import { useNavigate } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, HttpStatusCode } from 'axios';
 
 interface IRegisterFormProps {
 }
@@ -36,6 +35,7 @@ export const regions: TOptionType[] = [
 
 const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
   const [isRegisterable, setIsRegisterable] = React.useState<boolean>(false)
+  const [isNicknameError, setIsNicknameError] = React.useState<boolean>(false)
   const [email, setEmail] = React.useState<string>('')
   const [emailErrorText, setEmailErrorText] = React.useState<string>(REGISTER_WRONG_EMAIL_TEXT)
   const [isEmailError, setIsEmailError] = React.useState<boolean>(false)
@@ -50,7 +50,6 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
   const [checkSpecial, setCheckSpecial] = React.useState<boolean>()
   const [isMatch, setIsMatch] = React.useState<boolean>(true)
   const [region, setRegion] = React.useState<eRegion>(eRegion.VN)
-  const authContext = useAuth();
   const navigate = useNavigate();
   const onRegister = async () => {
     const accountCreate: TUserCreateInput = {
@@ -63,14 +62,14 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
     try {
       const result = await UserService.create(accountCreate)
       if (result.status) {
-        // authContext?.setUserInfo(result)
         navigate(PAGE_SIGN_IN)
       }
     } catch (error: any | AxiosError) {
       setIsRegisterable(false)
       if (axios.isAxiosError(error)) {
-        if (error.response?.status === RESP_STATUS_CODE_USER_ERROR) {
-          const errorCode = parseInt(error.message)
+        let errorCode = 0;
+        if (error.response?.status === HttpStatusCode.Conflict) {
+          errorCode = parseInt(error.response.data)
           if (errorCode === eRegisterError.UserNameExited) {
             setIsUsernameError(true)
             return
@@ -78,6 +77,17 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
           if (errorCode === eRegisterError.EmailExited) {
             setEmailErrorText(REGISTER_EXISTED_EMAIL_TEXT)
             setIsEmailError(true)
+            return
+          }
+        }
+        if (error.response?.status === HttpStatusCode.BadRequest) {
+          errorCode = parseInt(error.response.data)
+          if (errorCode === eRegisterError.NickNameHasAdmin) {
+            setIsNicknameError(true)
+            return
+          }
+          if (errorCode === eRegisterError.UserNameHasAdmin) {
+            setIsUsernameError(true)
             return
           }
         }
@@ -120,7 +130,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
         <InputField title={REGISTER_USERNAME_TITLE} isError={isUsernameError} hasValue={username.length > 0} onChangeValue={(v: string) => {
           setUsername(v)
         }} errorText={REGISTER_WRONG_USERNAME_TEXT} placeholder={REGISTER_USERNAME_PLACEHOLDER} />
-        <InputField title={REGISTER_NICKNAME_TITLE} isError={false} hasValue={nickname.length > 0} onChangeValue={(v: string) => {
+        <InputField title={REGISTER_NICKNAME_TITLE} isError={isNicknameError} hasValue={nickname.length > 0} onChangeValue={(v: string) => {
           setNickname(v)
         }} errorText={REGISTER_WRONG_NICKNAME_TEXT} placeholder={REGISTER_NICKNAME_PLACEHOLDER} />
         <PasswordInput title={REGISTER_PASS_TITLE} hasValue={password.length > 0} onChangeValue={(v: string) => {

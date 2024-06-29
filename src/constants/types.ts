@@ -40,11 +40,21 @@ export type TUserLoginOutput = {
   data: TUserLogin
 }
 
+export enum eRefreshTokenError {
+  Invalid = 1,
+  Expired = 2,
+}
+
+export enum eLoginError {
+  UserNotFound = 1,
+  InvalidPassword = 2,
+}
+
 export enum eRegisterError {
   UserNameExited = 1,
   UserNameHasAdmin = 2,
   PassTooShort = 3,
-  PassHasAdmin = 4,
+  NickNameHasAdmin = 4,
   EmailExited = 5,
 }
 

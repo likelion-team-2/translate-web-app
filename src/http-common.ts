@@ -1,5 +1,5 @@
 import axios, { AxiosRequestHeaders } from "axios";
-import { API_URL, LS_accessToken, LS_refreshToken, PAGE_SIGN_IN } from "./constants/constant";
+import { API_URL, LS_ACCESS_TOKEN, LS_REFRESH_TOKEN, PAGE_SIGN_IN } from "./constants/constant";
 import qs from "qs"
 import ApiService from "./services/apiService";
 
@@ -16,7 +16,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(LS_accessToken) || "";
+    const token = localStorage.getItem(LS_ACCESS_TOKEN) || "";
     config.headers.Authorization = `Bearer ${token}`
     return config;
   },
@@ -42,7 +42,7 @@ instance.interceptors.response.use(
   async (error) => {
     // console.log("---------error: ", error)
     const originalConfig = error.config;
-    const token = localStorage.getItem(LS_accessToken);
+    const token = localStorage.getItem(LS_ACCESS_TOKEN);
 
     // if we don't have token in local storage or error is not 401 just return error and break req.
     if (!token || !ApiService.isUnauthorizedError(error)) {
@@ -53,10 +53,7 @@ instance.interceptors.response.use(
       if (!refreshingFunc)
         refreshingFunc = ApiService.renewToken();
 
-      const [newToken, newRefreshToken] = await refreshingFunc;
-
-      localStorage.setItem(LS_accessToken, newToken);
-      localStorage.setItem(LS_refreshToken, newRefreshToken);
+      const [newToken, _newRefreshToken] = await refreshingFunc;
 
       originalConfig.headers.Authorization = `Bearer ${newToken}`;
 
@@ -71,8 +68,8 @@ instance.interceptors.response.use(
       }
 
     } catch (err) {
-      localStorage.removeItem(LS_accessToken);
-      localStorage.removeItem(LS_refreshToken);
+      localStorage.removeItem(LS_ACCESS_TOKEN);
+      localStorage.removeItem(LS_REFRESH_TOKEN);
 
       window.location.href = PAGE_SIGN_IN
 

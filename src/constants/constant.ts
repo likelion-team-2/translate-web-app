@@ -2,8 +2,8 @@ import { randomColor } from "../utils/helper"
 import { TUser, eRegion } from "./types"
 
 export const API_URL = "https://jsonplaceholder.typicode.com"
-export const LS_accessToken = "@accessToken"
-export const LS_refreshToken = "@refreshToken"
+export const LS_ACCESS_TOKEN = "@accessToken"
+export const LS_REFRESH_TOKEN = "@refreshToken"
 export const PAGE_SIGN_UP = "/signup"
 export const PAGE_SIGN_IN = "/signin"
 export const PAGE_TEST = "/test"
@@ -39,7 +39,7 @@ export const REGISTER_USERNAME_PLACEHOLDER = 'Ex: likelion@gmail.com'
 export const REGISTER_WRONG_USERNAME_TEXT = 'An account with this username already exists. Please try again.'
 export const REGISTER_NICKNAME_TITLE = 'Nickname'
 export const REGISTER_NICKNAME_PLACEHOLDER = 'Ex: likelion24'
-export const REGISTER_WRONG_NICKNAME_TEXT = 'An account with this nickname already exists. Please try again.'
+export const REGISTER_WRONG_NICKNAME_TEXT = `Nickname cannot contain 'admin' word. Please try again.`
 export const REGISTER_PASS_TITLE = 'Password'
 export const REGISTER_PASS_PLACEHOLDER = 'Password'
 export const REGISTER_WRONG_PASS_TEXT = 'Incorrect password. Please try again.'

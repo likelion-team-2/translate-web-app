@@ -2,13 +2,15 @@ import * as React from 'react';
 import { Button, Modal } from 'antd';
 import InputField from '../components/InputField';
 import PasswordInput from '../components/PasswordInput';
-import { LOGIN_USER_IDENTIFIER_TITLE, LOGIN_WRONG_USER_IDENTIFIER_TEXT, LOGIN_PASSWORD_TITLE, PASSWORD_MIN_LENGTH, LOGIN_USER_IDENTIFIER_PLACEHOLDER, LOGIN_PASSWORD_PLACEHOLDER, FORGET_PASS_MODAL_TITLE, FORGET_PASS_MODAL_CONTENT, PAGE_DEFAULT, PAGE_SIGN_UP } from '../../../constants/constant';
+import { LOGIN_USER_IDENTIFIER_TITLE, LOGIN_WRONG_USER_IDENTIFIER_TEXT, LOGIN_PASSWORD_TITLE, PASSWORD_MIN_LENGTH, LOGIN_USER_IDENTIFIER_PLACEHOLDER, LOGIN_PASSWORD_PLACEHOLDER, FORGET_PASS_MODAL_TITLE, FORGET_PASS_MODAL_CONTENT, PAGE_DEFAULT, PAGE_SIGN_UP, REGISTER_WRONG_PASS_TEXT } from '../../../constants/constant';
 import { useAuth } from '../../../context/AuthContext';
 import UserService from '../../../services/userServices';
-import { TUserLoginInput } from '../../../constants/types';
+import { TUserLoginInput, eLoginError } from '../../../constants/types';
 import { useNavigate } from 'react-router-dom';
 import { Body1 } from '../../../components/Text';
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, HttpStatusCode } from 'axios';
+import XIcon from '../../../components/Icons/XIcon';
+import LoginBodyS from '../../../components/Text/LoginBodyS';
 
 interface ILoginFormProps {
 }
@@ -19,15 +21,18 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
   const [hasUserIdentifierValue, setHasUserIdentifierValue] = React.useState<boolean>(false)
   const [hasPasswordValue, setHasPasswordValue] = React.useState<boolean>(false)
   const [isError, setIsError] = React.useState<boolean>(false)
+  const [isPassError, setIsPassError] = React.useState<boolean>(false)
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
-  //   const [login] = useMutation<TLoginResult, TLoginInput>(USER_LOGIN);
+  const [isEnable, setIsEnable] = React.useState<boolean>(false)
   const authContext = useAuth();
   const onChangeUserIdentifier = (v: string) => {
     setUserIdentifier(v)
+    if (isError) setIsError(false)
   }
 
   const onChangePassword = (v: string) => {
     setPassword(v)
+    if (isPassError) setIsPassError(false)
   }
   React.useMemo(() => {
     setHasUserIdentifierValue(userIdentifier.length > 0)
@@ -35,6 +40,10 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
   React.useMemo(() => {
     setHasPasswordValue(password.length > 0)
   }, [password])
+
+  React.useMemo(()=>{
+    setIsEnable(password.length > 0 && userIdentifier.length > 0 && password.length > PASSWORD_MIN_LENGTH)
+  },[password, userIdentifier])
 
   const onClick = async () => {
     setIsError(false);
@@ -51,7 +60,18 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
       }
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
-        console.log("login error: ", error)
+        setIsEnable(false)
+        if (error.response?.status === HttpStatusCode.NotFound) {
+          const errorCode = parseInt(error.response.data)
+          if (errorCode === eLoginError.UserNotFound) {
+            setIsError(true)
+            return
+          }
+          if (errorCode === eLoginError.InvalidPassword) {
+            setIsPassError(true)
+            return
+          }
+        }
       }
     }
   }
@@ -71,8 +91,16 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
     <div className='mt-[2rem] flex flex-col flex-1 gap-[0.5rem]'>
       <InputField title={LOGIN_USER_IDENTIFIER_TITLE} isError={isError} hasValue={hasUserIdentifierValue} onChangeValue={onChangeUserIdentifier} errorText={LOGIN_WRONG_USER_IDENTIFIER_TEXT} placeholder={LOGIN_USER_IDENTIFIER_PLACEHOLDER} />
       <PasswordInput title={LOGIN_PASSWORD_TITLE} hasValue={hasPasswordValue} onChangeValue={onChangePassword} placeholder={LOGIN_PASSWORD_PLACEHOLDER} />
+      {!isPassError && <>
+          <div className='w-full mt-[0.5rem] bg-sys-alert-light p-[1rem] flex gap-[0.5rem]'>
+            <div className='w-[1.5rem] h-[1.5rem]'>
+              <XIcon />
+            </div>
+            <LoginBodyS className='text-sys-alert-bold'>{REGISTER_WRONG_PASS_TEXT}</LoginBodyS>
+          </div>
+        </>}
       <div>
-        <Button className='w-full mt-[1.5rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px] disabled:bg-blue-shade disabled:text-neutral-White' disabled={!(hasPasswordValue && hasUserIdentifierValue && password.length > PASSWORD_MIN_LENGTH)} onClick={onClick}>Log in</Button>
+        <Button className='w-full mt-[1.5rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px] disabled:bg-blue-shade disabled:text-neutral-White' disabled={!(isEnable)} onClick={onClick}>Log in</Button>
       </div>
       <div className='w-full flex flex-row justify-center underline cursor-pointer text-blue-D30' onClick={onForget}>
         <Body1>Forget password?</Body1>
