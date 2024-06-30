@@ -53,6 +53,9 @@ export const RESP_STATUS_CODE_USER_ERROR = 409
 export const DEFAULT_USER_COLOR = randomColor()
 export const PROFILE_MODAL_TITLE = 'User profile'
 export const CHANGE_PW_MODAL_TITLE = 'Change password'
+export const CHANGE_OLD_PASS_TITLE = 'Current password'
+export const CHANGE_NEW_PASS_TITLE = 'New password'
+export const CHANGE_PW_WRONG_OLD_PASS_TEXT = 'Incorrect current password. Please try again.'
 
 export const FAKE_LIST_USER: TUser[] = [
     {

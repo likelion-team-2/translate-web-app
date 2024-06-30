@@ -6,6 +6,7 @@ export interface ITestPostData {
 }
 
 export type TUserInfo = {
+  userId: string
   email: string
   username: string
   nickname: string
@@ -79,7 +80,8 @@ export type TUserUpdateInput = {
 }
 
 export type TUserChangePassInput = {
-  password: string
+  oldPassword: string
+  newPassword: string
 }
 
 export type TUserCreateInput = {

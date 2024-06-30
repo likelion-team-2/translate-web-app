@@ -18,8 +18,8 @@ const update = (data: TUserUpdateInput) => {
   return http.post<TUserUpdateInput, TUserCreateOutput>("/v1/api/user/update", data);
 };
 
-const changePassword = (password: string) => {
-  return http.post<TUserChangePassInput, TUserCreateOutput>("/v1/api/user/changePassword", password);
+const changePassword = (input: TUserChangePassInput) => {
+  return http.post<TUserChangePassInput, TUserCreateOutput>("/v1/api/user/changePassword", input);
 };
 const UserService
  = {
