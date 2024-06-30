@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { TUser } from '../../../../../constants/types';
+import { TUserInfo } from '../../../../../constants/types';
 import { Body3 } from '../../../../Text';
 import DefaultUser from '../../../../Icons/DefaultUser';
 import { randomColor } from '../../../../../utils/helper';
 
 interface IDMUserProps {
-    user: TUser
+    user: TUserInfo
 }
 
 const DMUser: React.FunctionComponent<IDMUserProps> = ({ user }) => {

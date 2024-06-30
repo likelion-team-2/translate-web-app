@@ -1,5 +1,5 @@
 import { randomColor } from "../utils/helper"
-import { TUser, eRegion } from "./types"
+import { TUserInfo, eRegion } from "./types"
 
 export const API_URL = "https://jsonplaceholder.typicode.com"
 export const LS_ACCESS_TOKEN = "@accessToken"
@@ -57,44 +57,44 @@ export const CHANGE_OLD_PASS_TITLE = 'Current password'
 export const CHANGE_NEW_PASS_TITLE = 'New password'
 export const CHANGE_PW_WRONG_OLD_PASS_TEXT = 'Incorrect current password. Please try again.'
 
-export const FAKE_LIST_USER: TUser[] = [
+export const FAKE_LIST_USER: TUserInfo[] = [
     {
-        id: "id1",
+        userId: "id1",
         email: "1@gmail.com",
         nickname: "nickname1",
         regionCountry: eRegion.VN,
         username: "username1"
     },
     {
-        id: "id2",
+        userId: "id2",
         email: "2@gmail.com",
         nickname: "nickname2",
         regionCountry: eRegion.VN,
         username: "username2"
     },
     {
-        id: "id3",
+        userId: "id3",
         email: "3@gmail.com",
         nickname: "nickname3",
         regionCountry: eRegion.VN,
         username: "username3"
     },
     {
-        id: "id4",
+        userId: "id4",
         email: "4@gmail.com",
         nickname: "nickname4",
         regionCountry: eRegion.KR,
         username: "username4"
     },
     {
-        id: "id5",
+        userId: "id5",
         email: "5@gmail.com",
         nickname: "nickname5",
         regionCountry: eRegion.KR,
         username: "username5"
     },
     {
-        id: "id6",
+        userId: "id6",
         email: "6@gmail.com",
         nickname: "nickname6",
         regionCountry: eRegion.KR,

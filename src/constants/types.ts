@@ -5,6 +5,14 @@ export interface ITestPostData {
   body: string,
 }
 
+export type TGetFriendInput = {
+  text: string
+}
+
+export type TGetFriendOutput = {
+  data: TUserInfo[]
+}
+
 export type TUserInfo = {
   userId: string
   email: string
@@ -96,12 +104,4 @@ export interface IIconProps {
   color?: string
   width?: number
   height?: number
-}
-
-export type TUser = {
-  id: string
-  email: string
-  username: string
-  nickname: string
-  regionCountry: eRegion
 }

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Body2, Body3 } from '../../../Text';
 import DropdownIcon from '../../../Icons/DropdownIcon';
-import { TUser } from '../../../../constants/types';
+import { TUserInfo } from '../../../../constants/types';
 import DMUser from './DMUser';
 
 interface IDirectMessageProps {
-    users: TUser[]
+    users: TUserInfo[]
 }
 
 const DirectMessage: React.FunctionComponent<IDirectMessageProps> = ({ users }) => {
