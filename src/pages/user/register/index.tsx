@@ -137,10 +137,10 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
           setPassword(v)
         }} placeholder={REGISTER_PASS_PLACEHOLDER} />
         <div className='mt-[0.5rem] flex flex-col gap-[0.5rem]'>
-          <CheckItem text={PW_CHECK_MIN_LENGTH_TEXT} isChecked={checkLength} />
-          <CheckItem text={PW_CHECK_CAPITAL_TEXT} isChecked={checkCapital} />
-          <CheckItem text={PW_CHECK_NUMBER_TEXT} isChecked={checkNumber} />
-          <CheckItem text={PW_CHECK_SPECIAL_CHAR_TEXT} isChecked={checkSpecial} />
+          {checkLength && <CheckItem text={PW_CHECK_MIN_LENGTH_TEXT} isChecked={checkLength} />}
+          {checkCapital && <CheckItem text={PW_CHECK_CAPITAL_TEXT} isChecked={checkCapital} />}
+          {checkNumber && <CheckItem text={PW_CHECK_NUMBER_TEXT} isChecked={checkNumber} />}
+          {checkSpecial && <CheckItem text={PW_CHECK_SPECIAL_CHAR_TEXT} isChecked={checkSpecial} />}
         </div>
         <PasswordInput title={REGISTER_CONFIRM_PASS_TITLE} hasValue={confirmPassword.length > 0} onChangeValue={(v: string) => {
           setConfirmPassword(v)

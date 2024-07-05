@@ -14,6 +14,8 @@ export interface IChatContext {
   messageDesign: TMessage[]
   liveMessageDesign: TMessage[]
   setLiveMessageDesign: React.Dispatch<React.SetStateAction<TMessage[]>>
+  isReload: boolean
+  setIsReload: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const ChatContext = React.createContext<IChatContext | null>(null);
@@ -25,6 +27,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
   const [messageData, setMessageData] = React.useState<TMessageData[]>([]);
   const [messageDesign, setMessageDesign] = React.useState<TMessage[]>([]);
   const [liveMessageDesign, setLiveMessageDesign] = React.useState<TMessage[]>([]);
+  const [isReload, setIsReload] = React.useState<boolean>(false)
   const navigate = useNavigate();
   const { userInfo } = React.useContext(AuthContext)!
   React.useMemo(() => {
@@ -68,12 +71,19 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [selectedUser])
 
+  React.useMemo(()=>{
+    if (!isReload) return
+    //TODO: get more message
+  },[isReload])
+
   const data = {
     selectedUser,
     setSelectedUser,
     messageDesign,
     liveMessageDesign,
     setLiveMessageDesign,
+    isReload, 
+    setIsReload,
   };
   return <ChatContext.Provider value={data}>{children}</ChatContext.Provider>;
 };

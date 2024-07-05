@@ -28,7 +28,7 @@ const ChatFrame: React.FunctionComponent<IChatFrameProps> = (props) => {
         {/* <ChatSession /> */}
         <Routes>
             <Route path="/" element={<Outlet />}>
-                <Route path="/" element={<NoContent />} />
+                <Route path="/*" element={<NoContent />} />
                 <Route path={PAGE_CHAT_SESSION + "/:sessionId"} element={<ChatSession />} />
             </Route>
         </Routes>
