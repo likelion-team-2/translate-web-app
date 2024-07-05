@@ -5,7 +5,7 @@ import PasswordInput from '../components/PasswordInput';
 import { LOGIN_USER_IDENTIFIER_TITLE, LOGIN_WRONG_USER_IDENTIFIER_TEXT, LOGIN_PASSWORD_TITLE, PASSWORD_MIN_LENGTH, LOGIN_USER_IDENTIFIER_PLACEHOLDER, LOGIN_PASSWORD_PLACEHOLDER, FORGET_PASS_MODAL_TITLE, FORGET_PASS_MODAL_CONTENT, PAGE_DEFAULT, PAGE_SIGN_UP, REGISTER_WRONG_PASS_TEXT } from '../../../constants/constant';
 import { useAuth } from '../../../context/AuthContext';
 import UserService from '../../../services/userServices';
-import { TUserLoginInput, eLoginError } from '../../../constants/types';
+import { TUserInfo, TUserLogin, TUserLoginInput, eLoginError, eRegion } from '../../../constants/types';
 import { useNavigate } from 'react-router-dom';
 import { Body1 } from '../../../components/Text';
 import axios, { AxiosError, HttpStatusCode } from 'axios';
@@ -41,9 +41,9 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
     setHasPasswordValue(password.length > 0)
   }, [password])
 
-  React.useMemo(()=>{
+  React.useMemo(() => {
     setIsEnable(password.length > 0 && userIdentifier.length > 0 && password.length > PASSWORD_MIN_LENGTH)
-  },[password, userIdentifier])
+  }, [password, userIdentifier])
 
   const onClick = async () => {
     setIsError(false);
@@ -52,7 +52,6 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
       password: password,
     }
     try {
-
       const result = await UserService.login(accountLogin)
       if (result) {
         authContext?.setUserInfo(result.data)
@@ -91,14 +90,14 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
     <div className='mt-[2rem] flex flex-col flex-1 gap-[0.5rem]'>
       <InputField title={LOGIN_USER_IDENTIFIER_TITLE} isError={isError} hasValue={hasUserIdentifierValue} onChangeValue={onChangeUserIdentifier} errorText={LOGIN_WRONG_USER_IDENTIFIER_TEXT} placeholder={LOGIN_USER_IDENTIFIER_PLACEHOLDER} />
       <PasswordInput title={LOGIN_PASSWORD_TITLE} hasValue={hasPasswordValue} onChangeValue={onChangePassword} placeholder={LOGIN_PASSWORD_PLACEHOLDER} />
-      {!isPassError && <>
-          <div className='w-full mt-[0.5rem] bg-sys-alert-light p-[1rem] flex gap-[0.5rem]'>
-            <div className='w-[1.5rem] h-[1.5rem]'>
-              <XIcon />
-            </div>
-            <LoginBodyS className='text-sys-alert-bold'>{REGISTER_WRONG_PASS_TEXT}</LoginBodyS>
+      {isPassError && <>
+        <div className='w-full mt-[0.5rem] bg-sys-alert-light p-[1rem] flex gap-[0.5rem]'>
+          <div className='w-[1.5rem] h-[1.5rem]'>
+            <XIcon />
           </div>
-        </>}
+          <LoginBodyS className='text-sys-alert-bold'>{REGISTER_WRONG_PASS_TEXT}</LoginBodyS>
+        </div>
+      </>}
       <div>
         <Button className='w-full mt-[1.5rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px] disabled:bg-blue-shade disabled:text-neutral-White' disabled={!(isEnable)} onClick={onClick}>Log in</Button>
       </div>

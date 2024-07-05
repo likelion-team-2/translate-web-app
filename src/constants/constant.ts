@@ -1,5 +1,5 @@
 import { randomColor } from "../utils/helper"
-import { TUserInfo, eRegion } from "./types"
+import { TMessageData, TUserInfo, TUserLogin, eRegion } from "./types"
 
 export const API_URL = "https://jsonplaceholder.typicode.com"
 export const LS_ACCESS_TOKEN = "@accessToken"
@@ -56,6 +56,7 @@ export const CHANGE_PW_MODAL_TITLE = 'Change password'
 export const CHANGE_OLD_PASS_TITLE = 'Current password'
 export const CHANGE_NEW_PASS_TITLE = 'New password'
 export const CHANGE_PW_WRONG_OLD_PASS_TEXT = 'Incorrect current password. Please try again.'
+export const PAGE_CHAT_SESSION = "/chat"
 
 export const FAKE_LIST_USER: TUserInfo[] = [
     {
@@ -101,3 +102,47 @@ export const FAKE_LIST_USER: TUserInfo[] = [
         username: "username6"
     }
 ]
+
+export const FAKE_MESSAGE: TMessageData[] = [
+    {
+        messageId: 1,
+        date: new Date("2024-07-05T03:24:00"),
+        status: 'sent',
+        text: 'Tin nhan 1',
+        userId: 'id1'
+    },
+    {
+        messageId: 2,
+        date: new Date("2024-07-05T03:25:00"),
+        status: 'sent',
+        text: 'Tin nhan 2',
+        userId: 'id2'
+    },
+    {
+        messageId: 3,
+        date: new Date("2024-07-05T03:26:00"),
+        status: 'sent',
+        text: 'Tin nhan 3',
+        userId: 'id1'
+    },
+    {
+        messageId: 4,
+        date: new Date("2024-07-05T03:27:00"),
+        status: 'sent',
+        text: 'Tin nhan 4',
+        userId: 'id2'
+    },
+] 
+
+export const FAKE_USER_INFO: TUserLogin = {
+    accessToken: "string",
+    refreshToken: "string",
+    user:
+    {
+      userId: "id1",
+      email: "1@gmail.com",
+      nickname: "nickname1",
+      regionCountry: eRegion.VN,
+      username: "username1"
+    }
+  }

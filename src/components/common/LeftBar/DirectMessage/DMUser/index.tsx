@@ -1,18 +1,24 @@
 import * as React from 'react';
-import { TUserInfo } from '../../../../../constants/types';
+import { TUserInfo, TUserInfoDesign } from '../../../../../constants/types';
 import { Body3 } from '../../../../Text';
 import DefaultUser from '../../../../Icons/DefaultUser';
 import { randomColor } from '../../../../../utils/helper';
+import { ChatContext } from '../../../../../context/ChatContext';
 
 interface IDMUserProps {
-    user: TUserInfo
+    user: TUserInfoDesign
+    isSelected: boolean
 }
 
-const DMUser: React.FunctionComponent<IDMUserProps> = ({ user }) => {
+const DMUser: React.FunctionComponent<IDMUserProps> = ({ user, isSelected }) => {
+    const {setSelectedUser} = React.useContext(ChatContext)!
+    const onClick = () => {
+        setSelectedUser(user)
+    }
     return <>
-        <div className='h-[26px] flex flex-row gap-[8px] items-center cursor-pointer w-fit'>
-            <DefaultUser color={randomColor()}/>
-            <Body3 className='text-neutral-White opacity-70'>{user.nickname}</Body3>
+        <div className='h-[26px] flex flex-row gap-[8px] items-center cursor-pointer w-fit' onClick={onClick}>
+            <DefaultUser color={user.design.color}/>
+            <Body3 className={`text-neutral-White opacity-70 ${isSelected && 'font-7'}`}>{user.user.nickname}</Body3>
         </div>
     </>;
 };
