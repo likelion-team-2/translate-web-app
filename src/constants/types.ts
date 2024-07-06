@@ -105,3 +105,11 @@ export interface IIconProps {
   width?: number
   height?: number
 }
+
+export type TransportModel = {
+  sessionId: string
+  sender: string
+  recipient: string
+	content: string
+	token: string
+}

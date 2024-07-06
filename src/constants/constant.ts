@@ -1,12 +1,14 @@
 import { randomColor } from "../utils/helper"
 import { TUserInfo, eRegion } from "./types"
 
-export const API_URL = "https://jsonplaceholder.typicode.com"
+// export const API_URL = "https://jsonplaceholder.typicode.com"
+export const API_URL = "http://localhost:8080"
 export const LS_ACCESS_TOKEN = "@accessToken"
 export const LS_REFRESH_TOKEN = "@refreshToken"
 export const PAGE_SIGN_UP = "/signup"
 export const PAGE_SIGN_IN = "/signin"
 export const PAGE_TEST = "/test"
+export const PAGE_TEST_CHAT = "/test/chat"
 export const PAGE_DEFAULT = "/*"
 export const LOGIN_TITLE = 'Log in'
 export const LOGIN_SUBTITLE = 'Likelion translate chat helps you connect and improve your business.'
