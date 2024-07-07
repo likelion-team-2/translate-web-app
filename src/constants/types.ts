@@ -5,12 +5,33 @@ export interface ITestPostData {
   body: string,
 }
 
+export type TGetSessionIdInput = {
+  friendId: string
+}
+
+export type TSession = {
+  id: number
+}
+
+export type TGetSessionIdOutput = {
+  data: TSession
+}
+
 export type TGetFriendInput = {
   text: string
 }
 
 export type TGetFriendOutput = {
   data: TUserInfo[]
+}
+
+export type TUserDesign = {
+  color: string
+}
+
+export type TUserInfoDesign = {
+  user: TUserInfo
+  design: TUserDesign
 }
 
 export type TUserInfo = {
@@ -39,7 +60,7 @@ export type TUserLoginInput = {
   password: string
 }
 
-export type TUserLogin= {
+export type TUserLogin = {
   accessToken: string
   refreshToken: string
   user: TUserInfo
@@ -104,4 +125,22 @@ export interface IIconProps {
   color?: string
   width?: number
   height?: number
+}
+
+export type TMessage = {
+  data: TMessageData
+  design: TMessageDesign
+}
+
+export type TMessageDesign = {
+  position: 'left' | 'right'
+  title: string
+}
+
+export type TMessageData = {
+  messageId: string | number
+  date: Date
+  status: 'waiting' | 'sent' | 'received' | 'read'
+  text: string
+  userId: string
 }

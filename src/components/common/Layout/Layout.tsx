@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
 import LeftBar from '../LeftBar';
@@ -6,7 +6,7 @@ import LeftBar from '../LeftBar';
 const Layout: FC = ({ children }) => (
     <LayoutWrapper>
         <Header />
-        <main className='flex flex-row'>
+        <main className='flex flex-row flex-1'>
             <LeftBar />
             {children}
         </main>
@@ -16,5 +16,5 @@ const Layout: FC = ({ children }) => (
 export default Layout;
 
 const LayoutWrapper: FC = ({ children }) => (
-    <div className='flex flex-col min-h-screen'>{children}</div>
+    <div className='flex flex-col h-screen'>{children}</div>
 )

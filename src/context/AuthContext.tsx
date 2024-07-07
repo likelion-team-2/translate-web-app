@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createContext, useContext } from "react";
 import { TUserInfo, TUserLogin, TUserLoginOutput } from "../constants/types";
-import { LS_ACCESS_TOKEN, LS_REFRESH_TOKEN, PAGE_DEFAULT, PAGE_SIGN_IN } from "../constants/constant";
+import { FAKE_LIST_USER, FAKE_USER_INFO, LS_ACCESS_TOKEN, LS_REFRESH_TOKEN, PAGE_DEFAULT, PAGE_SIGN_IN } from "../constants/constant";
 import { useNavigate } from "react-router-dom";
 
 interface IAuthContext {
@@ -13,13 +13,13 @@ interface IAuthContext {
 export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [userInfo, setUserInfo] = React.useState<TUserLogin | null>(null);
+  const [userInfo, setUserInfo] = React.useState<TUserLogin | null>(FAKE_USER_INFO);
   const [token, setToken] = React.useState<string>('');
   const navigate = useNavigate();
   React.useEffect(() => {
     const localToken = localStorage.getItem(LS_ACCESS_TOKEN)
     if (!userInfo && !localToken) {
-      // navigate(PAGE_SIGN_IN)
+      navigate(PAGE_SIGN_IN)
     } else {
       if (userInfo) {
         setToken(userInfo.accessToken)

@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Body2, Body3 } from '../../../Text';
 import DropdownIcon from '../../../Icons/DropdownIcon';
-import { TUserInfo } from '../../../../constants/types';
+import { TUserInfo, TUserInfoDesign } from '../../../../constants/types';
 import DMUser from './DMUser';
+import { ChatContext } from '../../../../context/ChatContext';
 
 interface IDirectMessageProps {
-    users: TUserInfo[]
+    users: TUserInfoDesign[]
 }
 
 const DirectMessage: React.FunctionComponent<IDirectMessageProps> = ({ users }) => {
+    const {selectedUser} = React.useContext(ChatContext)!
     return <>
         <div className='mt-[12px] flex flex-col'>
             <div className='flex flex-row items-center'>
@@ -19,7 +21,7 @@ const DirectMessage: React.FunctionComponent<IDirectMessageProps> = ({ users }) 
             </div>
             <div className='flex flex-col gap-[8px]'>
                 {users.length > 0 && users.map((u, id) => {
-                    return <DMUser key={id} user={u} />
+                    return <DMUser key={id} user={u} isSelected={selectedUser?.user.userId === u.user.userId}/>
                 })}
             </div>
         </div>

@@ -7,7 +7,7 @@ interface INoContentProps {
 
 const NoContent: React.FunctionComponent<INoContentProps> = (props) => {
     return <>
-        <div className='flex flex-col w-full'>
+        <div className='flex flex-col flex-1 bg-neutral-White'>
             <div className='h-[49px] px-[17px] flex items-center w-full border border-[#E2E2E2] border-t-0 border-l-0 border-r-0 border-b-1'>
                 <H5>Threads</H5>
             </div>

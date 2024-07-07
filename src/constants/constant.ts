@@ -1,7 +1,7 @@
 import { randomColor } from "../utils/helper"
-import { TUserInfo, eRegion } from "./types"
+import { TMessageData, TUserInfo, TUserLogin, eRegion } from "./types"
 
-export const API_URL = "https://jsonplaceholder.typicode.com"
+export const API_URL = "localhost:8080"
 export const LS_ACCESS_TOKEN = "@accessToken"
 export const LS_REFRESH_TOKEN = "@refreshToken"
 export const PAGE_SIGN_UP = "/signup"
@@ -56,6 +56,7 @@ export const CHANGE_PW_MODAL_TITLE = 'Change password'
 export const CHANGE_OLD_PASS_TITLE = 'Current password'
 export const CHANGE_NEW_PASS_TITLE = 'New password'
 export const CHANGE_PW_WRONG_OLD_PASS_TEXT = 'Incorrect current password. Please try again.'
+export const PAGE_CHAT_SESSION = "/chat"
 
 export const FAKE_LIST_USER: TUserInfo[] = [
     {
@@ -101,3 +102,117 @@ export const FAKE_LIST_USER: TUserInfo[] = [
         username: "username6"
     }
 ]
+
+export const FAKE_MESSAGE: TMessageData[] = [
+    {
+        messageId: 1,
+        date: new Date("2024-07-05T03:24:00"),
+        status: 'sent',
+        text: 'Tin nhan 1',
+        userId: 'id1'
+    },
+    {
+        messageId: 2,
+        date: new Date("2024-07-05T03:25:00"),
+        status: 'sent',
+        text: 'Tin nhan 2',
+        userId: 'id2'
+    },
+    {
+        messageId: 3,
+        date: new Date("2024-07-05T03:26:00"),
+        status: 'sent',
+        text: 'Tin nhan 3',
+        userId: 'id1'
+    },
+    {
+        messageId: 4,
+        date: new Date("2024-07-05T03:27:00"),
+        status: 'sent',
+        text: 'Tin nhan 4',
+        userId: 'id2'
+    },
+    {
+        messageId: 5,
+        date: new Date("2024-07-05T03:26:00"),
+        status: 'sent',
+        text: 'Tin nhan 5',
+        userId: 'id1'
+    },
+    {
+        messageId: 6,
+        date: new Date("2024-07-05T03:27:00"),
+        status: 'sent',
+        text: 'Tin nhan 6',
+        userId: 'id2'
+    },
+    {
+        messageId: 7,
+        date: new Date("2024-07-05T03:26:00"),
+        status: 'sent',
+        text: 'Tin nhan 7',
+        userId: 'id1'
+    },
+    {
+        messageId: 8,
+        date: new Date("2024-07-05T03:27:00"),
+        status: 'sent',
+        text: 'Tin nhan 8',
+        userId: 'id2'
+    },
+    {
+        messageId: 9,
+        date: new Date("2024-07-05T03:26:00"),
+        status: 'sent',
+        text: 'Tin nhan 9',
+        userId: 'id1'
+    },
+    {
+        messageId: 10,
+        date: new Date("2024-07-05T03:27:00"),
+        status: 'sent',
+        text: 'Tin nhan 10',
+        userId: 'id2'
+    },
+    {
+        messageId: 11,
+        date: new Date("2024-07-05T03:26:00"),
+        status: 'sent',
+        text: 'Tin nhan 11',
+        userId: 'id1'
+    },
+    {
+        messageId: 12,
+        date: new Date("2024-07-05T03:27:00"),
+        status: 'sent',
+        text: 'Tin nhan 12',
+        userId: 'id2'
+    },
+    {
+        messageId: 13,
+        date: new Date("2024-07-05T03:26:00"),
+        status: 'sent',
+        text: 'Tin nhan 13',
+        userId: 'id1'
+    },
+    {
+        messageId: 14,
+        date: new Date("2024-07-05T03:27:00"),
+        status: 'sent',
+        text: 'Tin nhan 14',
+        userId: 'id2'
+    },
+] 
+
+export const FAKE_USER_INFO: TUserLogin = {
+    accessToken: "string",
+    refreshToken: "string",
+    user:
+    {
+      userId: "id1",
+      email: "1@gmail.com",
+      nickname: "nickname1",
+      regionCountry: eRegion.VN,
+      username: "username1"
+    }
+  }
