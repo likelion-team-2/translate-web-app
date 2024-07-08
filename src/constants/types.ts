@@ -1,3 +1,5 @@
+import { HttpStatusCode } from "axios"
+
 export interface ITestPostData {
   userId: number,
   id: number,
@@ -18,11 +20,11 @@ export type TGetSessionIdOutput = {
 }
 
 export type TGetFriendInput = {
-  text: string
+  usernameOrNickname: string
 }
 
 export type TGetFriendOutput = {
-  data: TUserInfo[]
+  data: { data: TUserInfo }
 }
 
 export type TUserDesign = {
@@ -66,8 +68,10 @@ export type TUserLogin = {
   user: TUserInfo
 }
 
-export type TUserLoginOutput = {
-  data: TUserLogin
+export interface IUserLoginOutput extends THttpResponse {
+  data: {
+    data: TUserLogin
+  }
 }
 
 export enum eRefreshTokenError {
@@ -92,6 +96,10 @@ export type TUserCreateErrorOutput = {
   errorCode: eRegisterError
 }
 
+export type THttpResponse = {
+  status: HttpStatusCode
+}
+
 export type TUserCreateOutput = {
   status: boolean
 }
@@ -109,6 +117,7 @@ export type TUserUpdateInput = {
 }
 
 export type TUserChangePassInput = {
+  email: string
   oldPassword: string
   newPassword: string
 }

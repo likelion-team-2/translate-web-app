@@ -6,9 +6,9 @@ import axios, { HttpStatusCode } from "axios";
 
 function isUnauthorizedError(error: any) {
     const {
-        response: { status },
+        response: { status, data: { data: dataMesg } },
     } = error;
-    return status === 401;
+    return status === 401 && dataMesg === null;
 }
 
 const refreshToken = (input: TRefreshTokenInput) => {
@@ -31,6 +31,7 @@ async function renewToken() {
         const response = await ApiService.refreshToken(refreshPayload);
         token = response.data.accessToken;
         newRefreshToken = response.data.refreshToken;
+        console.log("set token renew: ", token)
         localStorage.setItem(LS_REFRESH_TOKEN, newRefreshToken)
         localStorage.setItem(LS_ACCESS_TOKEN, token)
     } catch (error) {
