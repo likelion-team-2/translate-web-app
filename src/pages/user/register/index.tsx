@@ -106,6 +106,8 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
   React.useMemo(() => {
     if (!isEmailError && email.length > 0 && !isUsernameError && username.length > 0 && password.length > 0 && confirmPassword.length > 0 && isMatch && nickname.length > 0 && region && checkLength && checkCapital && checkNumber && checkSpecial) {
       setIsRegisterable(true)
+    } else {
+      setIsRegisterable(false)
     }
   }, [isEmailError, email, isUsernameError, username, password, confirmPassword, isMatch, region, checkLength, checkCapital, checkNumber, checkSpecial])
   React.useMemo(() => {

@@ -1,5 +1,5 @@
 
-import { TUserChangePassInput, TUserCreateInput, TUserCreateOutput, TUserInfo, TUserLoginInput, IUserLoginOutput, TUserUpdateInput } from "../constants/types";
+import { TUserChangePassInput, TUserCreateInput, TUserCreateOutput, TUserInfo, TUserLoginInput, IUserLoginOutput, TUserUpdateInput, TSendOtpInput, TSendOtpOutput, TVerifyOtpInput, TVerifyOtpOutput } from "../constants/types";
 import { http } from "../http-common";
 
 const get = (identifier: string) => {
@@ -18,6 +18,14 @@ const update = (data: TUserUpdateInput) => {
   return http.post<TUserUpdateInput, TUserCreateOutput>("/v1/api/auth/update", data);
 };
 
+const sendOtp = (data: TSendOtpInput) => {
+  return http.post<TSendOtpInput, TSendOtpOutput>("/v1/api/auth/sendotp", data);
+};
+
+const verifyOtpAndChangePw = (data: TVerifyOtpInput) => {
+  return http.post<TVerifyOtpInput, TVerifyOtpOutput>("/v1/api/auth/verifyotpandchangepassword", data);
+};
+
 const changePassword = (input: TUserChangePassInput) => {
   return http.patch<TUserChangePassInput, TUserCreateOutput>("/v1/api/user/changepassword", input);
 };
@@ -28,6 +36,8 @@ const UserService
   create,
   update,
   changePassword,
+  sendOtp,
+  verifyOtpAndChangePw,
 };
 
 export default UserService;

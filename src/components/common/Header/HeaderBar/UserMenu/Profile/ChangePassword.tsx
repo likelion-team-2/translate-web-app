@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 import * as React from 'react';
-import { CHANGE_NEW_PASS_TITLE, CHANGE_OLD_PASS_TITLE, CHANGE_PW_MODAL_TITLE, CHANGE_PW_WRONG_PASS_TEXT, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, RESP_STATUS_CODE_USER_ERROR, SPECIAL_CHARACTERS } from '../../../../../../constants/constant';
+import { CHANGE_NEW_PASS_TITLE, CHANGE_OLD_PASS_TITLE, CHANGE_PW_EMAIL_TITLE, CHANGE_PW_WRONG_PASS_TEXT, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, RESP_STATUS_CODE_USER_ERROR, SPECIAL_CHARACTERS } from '../../../../../../constants/constant';
 import CheckItem from '../../../../../../pages/user/components/CheckItem';
 import PasswordInput from '../../../../../../pages/user/components/PasswordInput';
 import { TUserChangePassInput } from '../../../../../../constants/types';
@@ -63,7 +63,7 @@ const ChangePassword: React.FunctionComponent<IChangePasswordProps> = ({ isOpen,
         }
     }
     return <>
-        <Modal title={CHANGE_PW_MODAL_TITLE} open={isOpen} onCancel={() => setIsOpen(false)} onOk={onConfirm} centered={true}>
+        <Modal title={CHANGE_PW_EMAIL_TITLE} open={isOpen} onCancel={() => setIsOpen(false)} onOk={onConfirm} centered={true}>
             <PasswordInput title={CHANGE_OLD_PASS_TITLE} hasValue={oldPassword.length > 0} onChangeValue={(v: string) => {
                 setOldPassword(v)
             }} placeholder={REGISTER_PASS_PLACEHOLDER} />

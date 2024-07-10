@@ -92,6 +92,12 @@ export enum eRegisterError {
   EmailExited = 5,
 }
 
+export enum eVerifyOtpError {
+  PassTooShort = 1,
+  NewPassTooShort = 2,
+  OldPassTooShort = 3,
+}
+
 export type TUserCreateErrorOutput = {
   errorCode: eRegisterError
 }
@@ -107,6 +113,24 @@ export type TUserCreateOutput = {
 export enum eRegion {
   VN = "Vietnam",
   KR = "Korea"
+}
+
+export type TVerifyOtpInput = {
+  email: string
+  newPassword: string
+  otp: string
+}
+
+export type TVerifyOtpOutput = {
+  status: boolean
+}
+
+export type TSendOtpInput = {
+  email: string
+}
+
+export type TSendOtpOutput = {
+  status: boolean
 }
 
 export type TUserUpdateInput = {
