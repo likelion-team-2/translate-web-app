@@ -30,7 +30,6 @@ const WebSocketContextProvider: React.FC<{ children: ReactNode }> = ({children})
     setWsClient(wsObj);
     if (wsObj) {
       wsObj.onConnect = () => {
-        console.log("WS connected");
         setWsConnected(true);
       }
   

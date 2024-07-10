@@ -18,8 +18,17 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
   const params = useParams();
   const { sessionId } = params;
   const { selectedUser } = props;
+  const ref = React.useRef<HTMLInputElement>(null)
+
+  let onClear = () => {
+    if (ref.current) {
+      ref.current.value = "";
+    }
+    setValue("");
+  }
   
   const onSend = () => {
+    onClear();
     if (value && wsClient?.connected) {
       wsClient.publish({
         destination: "/message",
@@ -52,7 +61,6 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
         ]
       });
     }
-    setValue("");
   }
 
   React.useEffect(() => {
@@ -60,7 +68,6 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
       // Update the message the user just sent
       wsClient.subscribe(`/topic/user/${selectedUser.user.username}`, (res: IMessage) => {
         const messageReponse = JSON.parse(res.body) as TMessageResponse;
-        console.log("messageReponse1", messageReponse);
         const newMessage = {
           data: {
             date: messageReponse.createdAt,
@@ -87,7 +94,6 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
       // Handle the message received from other user
       wsClient.subscribe(`/topic/user/${userInfo?.user.username}`, (res: IMessage) => {
         const messageReponse = JSON.parse(res.body) as TMessageResponse;
-        console.log("messageReponse2", messageReponse);
         const newMessage = {
           data: {
             date: messageReponse.createdAt,
@@ -115,6 +121,7 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
   return <>
     <div>
       <Input
+        referance={ref}
         maxHeight={60}
         placeholder='Type here...'
         multiline={true}
@@ -124,6 +131,7 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
         onChange={(e: any) => {
           setValue(e.target.value)
         }}
+        clear={(clear: any) => (onClear = clear)}
       />
     </div>
   </>;
