@@ -1,7 +1,7 @@
 import { randomColor } from "../utils/helper"
 import { TMessageData, TUserInfo, TUserLogin, eRegion } from "./types"
 
-export const API_URL = "localhost:8080"
+export const API_URL = "http://localhost:8080"
 export const LS_ACCESS_TOKEN = "@accessToken"
 export const LS_REFRESH_TOKEN = "@refreshToken"
 export const PAGE_SIGN_UP = "/signup"
