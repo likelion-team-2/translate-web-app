@@ -3,9 +3,9 @@ import { Button, Modal } from 'antd';
 import InputField from '../components/InputField';
 import PasswordInput from '../components/PasswordInput';
 import { LOGIN_USER_IDENTIFIER_TITLE, LOGIN_WRONG_USER_IDENTIFIER_TEXT, LOGIN_PASSWORD_TITLE, PASSWORD_MIN_LENGTH, LOGIN_USER_IDENTIFIER_PLACEHOLDER, LOGIN_PASSWORD_PLACEHOLDER, FORGET_PASS_MODAL_TITLE, FORGET_PASS_MODAL_CONTENT, PAGE_DEFAULT, PAGE_SIGN_UP, REGISTER_WRONG_PASS_TEXT } from '../../../constants/constant';
-import { useAuth } from '../../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 import UserService from '../../../services/userServices';
-import { TUserInfo, TUserLogin, TUserLoginInput, eLoginError, eRegion } from '../../../constants/types';
+import { TUserLoginInput, eLoginError } from '../../../constants/types';
 import { useNavigate } from 'react-router-dom';
 import { Body1 } from '../../../components/Text';
 import axios, { AxiosError, HttpStatusCode } from 'axios';
@@ -24,7 +24,8 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
   const [isPassError, setIsPassError] = React.useState<boolean>(false)
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const [isEnable, setIsEnable] = React.useState<boolean>(false)
-  const authContext = useAuth();
+  const { setUserInfo } = React.useContext(AuthContext)!
+  // const authContext = useAuth();
   const onChangeUserIdentifier = (v: string) => {
     setUserIdentifier(v)
     if (isError) setIsError(false)
@@ -53,8 +54,9 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
     }
     try {
       const result = await UserService.login(accountLogin)
-      if (result) {
-        authContext?.setUserInfo(result.data)
+      if (result.status === HttpStatusCode.Ok) {
+        // console.log("---~~~", result.data.data)
+        setUserInfo(result.data.data)
         navigate(PAGE_DEFAULT)
       }
     } catch (error: any | AxiosError) {

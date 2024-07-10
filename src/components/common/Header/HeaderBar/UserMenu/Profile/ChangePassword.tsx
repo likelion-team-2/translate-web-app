@@ -8,6 +8,7 @@ import axios, { AxiosError } from 'axios';
 import UserService from '../../../../../../services/userServices';
 import XIcon from '../../../../../Icons/XIcon';
 import LoginBodyS from '../../../../../Text/LoginBodyS';
+import { AuthContext } from '../../../../../../context/AuthContext';
 
 interface IChangePasswordProps {
     isOpen: boolean
@@ -15,6 +16,7 @@ interface IChangePasswordProps {
 }
 
 const ChangePassword: React.FunctionComponent<IChangePasswordProps> = ({ isOpen, setIsOpen }) => {
+    const {userInfo} = React.useContext(AuthContext)!
     const [errorText, setErrorText] = React.useState<string>(REGISTER_WRONG_CONFIRM_PASS_TEXT)
     const [oldPassword, setOldPassword] = React.useState<string>('')
     const [password, setPassword] = React.useState<string>('')
@@ -41,10 +43,13 @@ const ChangePassword: React.FunctionComponent<IChangePasswordProps> = ({ isOpen,
         }
         try {
             const changeInput: TUserChangePassInput = {
+                email: userInfo!.user.email,
                 oldPassword,
                 newPassword: password
             }
+            console.log("----changeInput: ", changeInput)
             const result = await UserService.changePassword(changeInput)
+            console.log("----change: ", result)
             if (result) {
                 setIsOpen(false)
             }

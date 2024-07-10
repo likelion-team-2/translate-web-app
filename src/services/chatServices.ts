@@ -3,11 +3,11 @@ import { TGetFriendInput, TGetFriendOutput, TGetSessionIdInput, TGetSessionIdOut
 import { http } from "../http-common";
 
 const searchFriend = (input: TGetFriendInput) => {
-  return http.get<TGetFriendInput, TGetFriendOutput>(`"/v1/api/chat/search/friend/${input.text}`);
+  return http.get<TGetFriendInput, TGetFriendOutput>(`v1/api/user/getuser?usernameOrNickname=${input.usernameOrNickname}`);
 };
 
 const getSessionId = (input: TGetSessionIdInput) => {
-  return http.get<TGetSessionIdInput, TGetSessionIdOutput>(`"/v1/api/chat/get/sessionId/${input.friendId}`);
+  return http.get<TGetSessionIdInput, TGetSessionIdOutput>(`v1/api/chat/get/sessionId/${input.friendId}`);
 };
 
 const ChatService
