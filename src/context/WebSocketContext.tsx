@@ -60,4 +60,4 @@ const WebSocketContextProvider: React.FC<{ children: ReactNode }> = ({children})
   )
 }
 
-export {WebSocketContext, WebSocketContextProvider}
+export { WebSocketContext, WebSocketContextProvider }
