@@ -1,5 +1,7 @@
 import { HttpStatusCode } from "axios"
 
+import { Client } from "@stomp/stompjs"
+
 export interface ITestPostData {
   userId: number,
   id: number,
@@ -152,4 +154,22 @@ export type TMessageData = {
   status: 'waiting' | 'sent' | 'received' | 'read'
   text: string
   userId: string
+}
+
+export type WebSocketContextType = {
+  wsClient: Client | undefined
+  isWsConnected: boolean
+  setWsClient: (ws: Client) => void
+  setWsConnected: (isConnected: boolean) => void
+}
+
+export type TMessageResponse = {
+  id: string;
+  sender: string;
+  recipient: string;
+  content: string;
+  contentVi: string;
+  contentKo: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
