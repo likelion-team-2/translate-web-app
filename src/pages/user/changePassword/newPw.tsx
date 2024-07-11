@@ -47,7 +47,6 @@ const ChangeNewPw: React.FunctionComponent<IChangeNewPwProps> = (props) => {
     }, [password, confirmPassword, isMatch, checkLength, checkCapital, checkNumber, checkSpecial, otp])
 
     const onClick = async () => {
-        console.log("location.state.email: ", location.state.email)
         try {
             const data: TVerifyOtpInput = {
                 email: location.state.email,

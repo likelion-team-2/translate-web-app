@@ -42,7 +42,7 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
   }, [password])
 
   React.useMemo(() => {
-    setIsEnable(password.length > 0 && userIdentifier.length > 0 && password.length > PASSWORD_MIN_LENGTH)
+    setIsEnable(password.length > 0 && userIdentifier.length > 0 && password.length >= PASSWORD_MIN_LENGTH)
   }, [password, userIdentifier])
 
   const onClick = async () => {

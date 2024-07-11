@@ -6,7 +6,6 @@ import ApiService from "./services/apiService";
 export const config = {
   Accept: "application/json",
   "Content-Type": "application/json",
-  "Authorization": "",
 }
 
 const instance = axios.create({

@@ -29,32 +29,6 @@ const ChangePwEmail: React.FunctionComponent<IChangePwEmailProps> = (props) => {
       }
     } catch (error: any | AxiosError) {
       setIsEmailError(true)
-      // if (axios.isAxiosError(error)) {
-      //   let errorCode = 0;
-      //   if (error.response?.status === HttpStatusCode.BadRequest) {
-      //     errorCode = parseInt(error.response.data)
-      //     if (errorCode === eRegisterError.UserNameExited) {
-      //       setIsUsernameError(true)
-      //       return
-      //     }
-      //     if (errorCode === eRegisterError.EmailExited) {
-      //       setEmailErrorText(REGISTER_EXISTED_EMAIL_TEXT)
-      //       setIsEmailError(true)
-      //       return
-      //     }
-      //   }
-      //   if (error.response?.status === HttpStatusCode.BadRequest) {
-      //     errorCode = parseInt(error.response.data)
-      //     if (errorCode === eRegisterError.NickNameHasAdmin) {
-      //       setIsNicknameError(true)
-      //       return
-      //     }
-      //     if (errorCode === eRegisterError.UserNameHasAdmin) {
-      //       setIsUsernameError(true)
-      //       return
-      //     }
-      //   }
-      // }
     }
   }
 

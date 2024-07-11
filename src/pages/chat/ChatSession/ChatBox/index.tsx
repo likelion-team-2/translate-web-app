@@ -11,6 +11,7 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
   const { userInfo } = React.useContext(AuthContext)!
   const [value, setValue] = React.useState<string>()
   const onSend = () => {
+    onClear()
     const temp = {
       data: {
         date: new Date(),
@@ -31,9 +32,22 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
       ]
     })
   }
+  
+  const ref = React.useRef<HTMLInputElement>(null)
+  let onClear = () => {
+    if (ref.current) {
+      ref.current.value = "";
+    }
+    setValue("")
+  }
+
+  React.useMemo(() => {
+    console.log("---", value)
+  }, [value])
   return <>
     <div>
       <Input
+        referance={ref}
         maxHeight={60}
         placeholder='Type here...'
         multiline={true}
@@ -43,6 +57,7 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
         onChange={(e: any) => {
           setValue(e.target.value)
         }}
+        clear={(clear: any) => (onClear = clear)}
       />
     </div>
   </>;

@@ -94,8 +94,7 @@ export enum eRegisterError {
 
 export enum eVerifyOtpError {
   PassTooShort = 1,
-  NewPassTooShort = 2,
-  OldPassTooShort = 3,
+  MismatchOtpEmail = 2,
 }
 
 export type TUserCreateErrorOutput = {
