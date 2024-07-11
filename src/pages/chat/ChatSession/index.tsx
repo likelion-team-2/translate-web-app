@@ -8,8 +8,9 @@ interface IChatSessionProps {
 }
 
 const ChatSession: React.FunctionComponent<IChatSessionProps> = (props) => {
-    const { selectedUser, messageDesign, liveMessageDesign, isReload, setIsReload } = React.useContext(ChatContext)!
-    const windowHeight = window.innerHeight
+    const { selectedUser, messageDesign, liveMessageDesign, isReload, setIsReload } = React.useContext(ChatContext)!;
+    const windowHeight = window.innerHeight;
+    
     const onScroll = (e: any) => {
         const target = e.target as HTMLElement
         if (target && target.scrollTop + target.scrollHeight === target.clientHeight) {
@@ -22,7 +23,7 @@ const ChatSession: React.FunctionComponent<IChatSessionProps> = (props) => {
             <div className='flex flex-col flex-1 justify-between'>
                 <ChatHeader user={selectedUser} />
                 <div className='flex flex-col-reverse gap-[8px] w-full flex-1 justify-start'>
-                    <ChatBox />
+                    <ChatBox selectedUser={selectedUser} />
                     <section className={`overflow-auto flex flex-col-reverse`} style={{
                         height: windowHeight - 180 + "px"
                     }} onScroll={onScroll}>
