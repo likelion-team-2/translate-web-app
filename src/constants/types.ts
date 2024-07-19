@@ -1,3 +1,7 @@
+import { HttpStatusCode } from "axios"
+
+import { Client } from "@stomp/stompjs"
+
 export interface ITestPostData {
   userId: number,
   id: number,
@@ -18,11 +22,11 @@ export type TGetSessionIdOutput = {
 }
 
 export type TGetFriendInput = {
-  text: string
+  usernameOrNickname: string
 }
 
 export type TGetFriendOutput = {
-  data: TUserInfo[]
+  data: { data: TUserInfo }
 }
 
 export type TUserDesign = {
@@ -66,8 +70,10 @@ export type TUserLogin = {
   user: TUserInfo
 }
 
-export type TUserLoginOutput = {
-  data: TUserLogin
+export interface IUserLoginOutput extends THttpResponse {
+  data: {
+    data: TUserLogin
+  }
 }
 
 export enum eRefreshTokenError {
@@ -88,8 +94,17 @@ export enum eRegisterError {
   EmailExited = 5,
 }
 
+export enum eVerifyOtpError {
+  PassTooShort = 1,
+  MismatchOtpEmail = 2,
+}
+
 export type TUserCreateErrorOutput = {
   errorCode: eRegisterError
+}
+
+export type THttpResponse = {
+  status: HttpStatusCode
 }
 
 export type TUserCreateOutput = {
@@ -101,6 +116,24 @@ export enum eRegion {
   KR = "Korea"
 }
 
+export type TVerifyOtpInput = {
+  email: string
+  newPassword: string
+  otp: string
+}
+
+export type TVerifyOtpOutput = {
+  status: boolean
+}
+
+export type TSendOtpInput = {
+  email: string
+}
+
+export type TSendOtpOutput = {
+  status: boolean
+}
+
 export type TUserUpdateInput = {
   email: string
   username: string
@@ -109,6 +142,7 @@ export type TUserUpdateInput = {
 }
 
 export type TUserChangePassInput = {
+  email: string
   oldPassword: string
   newPassword: string
 }
@@ -143,4 +177,22 @@ export type TMessageData = {
   status: 'waiting' | 'sent' | 'received' | 'read'
   text: string
   userId: string
+}
+
+export type WebSocketContextType = {
+  wsClient: Client | undefined
+  isWsConnected: boolean
+  setWsClient: (ws: Client) => void
+  setWsConnected: (isConnected: boolean) => void
+}
+
+export type TMessageResponse = {
+  id: string;
+  sender: string;
+  recipient: string;
+  content: string;
+  contentVi: string;
+  contentKo: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

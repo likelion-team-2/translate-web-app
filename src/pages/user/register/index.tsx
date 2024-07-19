@@ -49,7 +49,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
   const [checkNumber, setCheckNumber] = React.useState<boolean>()
   const [checkSpecial, setCheckSpecial] = React.useState<boolean>()
   const [isMatch, setIsMatch] = React.useState<boolean>(true)
-  const [region, setRegion] = React.useState<eRegion>(eRegion.VN)
+  const [region, setRegion] = React.useState<eRegion>()
   const navigate = useNavigate();
   const onRegister = async () => {
     const accountCreate: TUserCreateInput = {
@@ -57,7 +57,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
       username,
       nickname,
       password,
-      regionCountry: region,
+      regionCountry: region!,
     }
     try {
       const result = await UserService.create(accountCreate)
@@ -104,17 +104,21 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
     }
   }, [email])
   React.useMemo(() => {
-    if (!isEmailError && email.length > 0 && !isUsernameError && username.length > 0 && password.length > 0 && confirmPassword.length > 0 && isMatch && nickname.length > 0) {
+    if (!isEmailError && email.length > 0 && !isUsernameError && username.length > 0 && password.length > 0 && confirmPassword.length > 0 && isMatch && nickname.length > 0 && region && checkLength && checkCapital && checkNumber && checkSpecial) {
       setIsRegisterable(true)
+    } else {
+      setIsRegisterable(false)
     }
-  }, [isEmailError, email, isUsernameError, username, password, confirmPassword, isMatch])
+  }, [isEmailError, email, isUsernameError, username, password, confirmPassword, isMatch, region, checkLength, checkCapital, checkNumber, checkSpecial])
   React.useMemo(() => {
-    setCheckLength(password.length >= PASSWORD_MIN_LENGTH)
-    setCheckCapital(password !== password.toLowerCase())
-    setCheckNumber(/\d/.test(password))
-    setCheckSpecial(SPECIAL_CHARACTERS.test(password))
-    if (confirmPassword && confirmPassword.length >= password.length) {
-      setIsMatch(password === confirmPassword)
+    if (confirmPassword && confirmPassword.length > 0) {
+      setCheckLength(password.length >= PASSWORD_MIN_LENGTH)
+      setCheckCapital(password !== password.toLowerCase())
+      setCheckNumber(/\d/.test(password))
+      setCheckSpecial(SPECIAL_CHARACTERS.test(password))
+      if (confirmPassword.length >= password.length) {
+        setIsMatch(password === confirmPassword)
+      }
     }
   }, [password, confirmPassword])
 
@@ -137,10 +141,10 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
           setPassword(v)
         }} placeholder={REGISTER_PASS_PLACEHOLDER} />
         <div className='mt-[0.5rem] flex flex-col gap-[0.5rem]'>
-          {checkLength && <CheckItem text={PW_CHECK_MIN_LENGTH_TEXT} isChecked={checkLength} />}
-          {checkCapital && <CheckItem text={PW_CHECK_CAPITAL_TEXT} isChecked={checkCapital} />}
-          {checkNumber && <CheckItem text={PW_CHECK_NUMBER_TEXT} isChecked={checkNumber} />}
-          {checkSpecial && <CheckItem text={PW_CHECK_SPECIAL_CHAR_TEXT} isChecked={checkSpecial} />}
+          {checkLength === false && <CheckItem text={PW_CHECK_MIN_LENGTH_TEXT} isChecked={checkLength} />}
+          {checkCapital === false && <CheckItem text={PW_CHECK_CAPITAL_TEXT} isChecked={checkCapital} />}
+          {checkNumber === false && <CheckItem text={PW_CHECK_NUMBER_TEXT} isChecked={checkNumber} />}
+          {checkSpecial === false && <CheckItem text={PW_CHECK_SPECIAL_CHAR_TEXT} isChecked={checkSpecial} />}
         </div>
         <PasswordInput title={REGISTER_CONFIRM_PASS_TITLE} hasValue={confirmPassword.length > 0} onChangeValue={(v: string) => {
           setConfirmPassword(v)
@@ -168,7 +172,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = (props) => {
           />
         </div>
         <div>
-          <Button className='w-full mt-[1rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] !text-neutral-White rounded-[4px] disabled:bg-blue-shade' disabled={!isRegisterable} onClick={onRegister}>Đăng ký</Button>
+          <Button className='w-full mt-[1rem] h-[4rem] bg-blue-Primary text-[22px] font-6 leading-[32px] text-neutral-White rounded-[4px] disabled:bg-blue-shade' disabled={!isRegisterable} onClick={onRegister}>Đăng ký</Button>
         </div>
       </div>
     </div>

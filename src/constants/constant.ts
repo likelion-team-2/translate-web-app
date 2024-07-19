@@ -1,9 +1,11 @@
 import { randomColor } from "../utils/helper"
 import { TMessageData, TUserInfo, TUserLogin, eRegion } from "./types"
 
-export const API_URL = "localhost:8080"
+export const API_URL = "http://localhost:8080"
 export const LS_ACCESS_TOKEN = "@accessToken"
 export const LS_REFRESH_TOKEN = "@refreshToken"
+export const PAGE_CHANGE_PASSWORD_EMAIL = "/changePw/email"
+export const PAGE_CHANGE_PASSWORD_NEW = "/changePw/newPw"
 export const PAGE_SIGN_UP = "/signup"
 export const PAGE_SIGN_IN = "/signin"
 export const PAGE_TEST = "/test"
@@ -52,10 +54,19 @@ export const RESP_STATUS_CODE_WRONG_API = 404
 export const RESP_STATUS_CODE_USER_ERROR = 409
 export const DEFAULT_USER_COLOR = randomColor()
 export const PROFILE_MODAL_TITLE = 'User profile'
-export const CHANGE_PW_MODAL_TITLE = 'Change password'
+export const CHANGE_PW_EMAIL_TITLE = 'Forgot Password'
+export const CHANGE_PW_EMAIL_SUBTITLE = 'Please enter the email you use to sign in to Likelion chat.'
+export const CHANGE_PW_NEW_TITLE = 'Reset your Password'
+export const CHANGE_PW_NEW_SUBTITLE = `Please create a new password that you don't use on any other site.`
+export const CHANGE_PW_OTP_TITLE = 'Confirm OTP'
+export const CHANGE_PW_OTP_SUBTITLE = 'An OTP has been sent to your email to set your password. Please enter the OTP here.'
 export const CHANGE_OLD_PASS_TITLE = 'Current password'
 export const CHANGE_NEW_PASS_TITLE = 'New password'
 export const CHANGE_PW_WRONG_OLD_PASS_TEXT = 'Incorrect current password. Please try again.'
+export const CHANGE_PW_WRONG_EMAIL_TEXT = 'Incorrect email. Please try again.'
+export const OTP_TITLE = 'Please enter OTP here'
+export const CHANGE_PW_WRONG_OTP_TEXT = 'Incorrect OTP. Please try again.'
+export const CHANGE_PW_WRONG_OTP_PLACEHOLDER = 'Ex: 123456'
 export const PAGE_CHAT_SESSION = "/chat"
 
 export const FAKE_LIST_USER: TUserInfo[] = [

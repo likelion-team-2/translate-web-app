@@ -37,8 +37,8 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       const temp = {
         data: m,
         design: {
-          title: userInfo.user.nickname,
-          position: userInfo.user.userId === m.userId ? "right" : "left"
+          title: userInfo!.user.nickname,
+          position: userInfo!.user.userId === m.userId ? "right" : "left"
         }
       } as TMessage
       convertData.push(temp)

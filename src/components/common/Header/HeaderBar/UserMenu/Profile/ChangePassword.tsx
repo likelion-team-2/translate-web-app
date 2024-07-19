@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 import * as React from 'react';
-import { CHANGE_NEW_PASS_TITLE, CHANGE_OLD_PASS_TITLE, CHANGE_PW_MODAL_TITLE, CHANGE_PW_WRONG_PASS_TEXT, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, RESP_STATUS_CODE_USER_ERROR, SPECIAL_CHARACTERS } from '../../../../../../constants/constant';
+import { CHANGE_NEW_PASS_TITLE, CHANGE_OLD_PASS_TITLE, CHANGE_PW_EMAIL_TITLE, CHANGE_PW_WRONG_PASS_TEXT, PASSWORD_MIN_LENGTH, PW_CHECK_CAPITAL_TEXT, PW_CHECK_MIN_LENGTH_TEXT, PW_CHECK_NUMBER_TEXT, PW_CHECK_SPECIAL_CHAR_TEXT, REGISTER_CONFIRM_PASS_PLACEHOLDER, REGISTER_CONFIRM_PASS_TITLE, REGISTER_PASS_PLACEHOLDER, REGISTER_PASS_TITLE, REGISTER_WRONG_CONFIRM_PASS_TEXT, RESP_STATUS_CODE_USER_ERROR, SPECIAL_CHARACTERS } from '../../../../../../constants/constant';
 import CheckItem from '../../../../../../pages/user/components/CheckItem';
 import PasswordInput from '../../../../../../pages/user/components/PasswordInput';
 import { TUserChangePassInput } from '../../../../../../constants/types';
@@ -8,6 +8,7 @@ import axios, { AxiosError } from 'axios';
 import UserService from '../../../../../../services/userServices';
 import XIcon from '../../../../../Icons/XIcon';
 import LoginBodyS from '../../../../../Text/LoginBodyS';
+import { AuthContext } from '../../../../../../context/AuthContext';
 
 interface IChangePasswordProps {
     isOpen: boolean
@@ -15,6 +16,7 @@ interface IChangePasswordProps {
 }
 
 const ChangePassword: React.FunctionComponent<IChangePasswordProps> = ({ isOpen, setIsOpen }) => {
+    const {userInfo} = React.useContext(AuthContext)!
     const [errorText, setErrorText] = React.useState<string>(REGISTER_WRONG_CONFIRM_PASS_TEXT)
     const [oldPassword, setOldPassword] = React.useState<string>('')
     const [password, setPassword] = React.useState<string>('')
@@ -41,10 +43,13 @@ const ChangePassword: React.FunctionComponent<IChangePasswordProps> = ({ isOpen,
         }
         try {
             const changeInput: TUserChangePassInput = {
+                email: userInfo!.user.email,
                 oldPassword,
                 newPassword: password
             }
+            console.log("----changeInput: ", changeInput)
             const result = await UserService.changePassword(changeInput)
+            console.log("----change: ", result)
             if (result) {
                 setIsOpen(false)
             }
@@ -58,7 +63,7 @@ const ChangePassword: React.FunctionComponent<IChangePasswordProps> = ({ isOpen,
         }
     }
     return <>
-        <Modal title={CHANGE_PW_MODAL_TITLE} open={isOpen} onCancel={() => setIsOpen(false)} onOk={onConfirm} centered={true}>
+        <Modal title={CHANGE_PW_EMAIL_TITLE} open={isOpen} onCancel={() => setIsOpen(false)} onOk={onConfirm} centered={true}>
             <PasswordInput title={CHANGE_OLD_PASS_TITLE} hasValue={oldPassword.length > 0} onChangeValue={(v: string) => {
                 setOldPassword(v)
             }} placeholder={REGISTER_PASS_PLACEHOLDER} />

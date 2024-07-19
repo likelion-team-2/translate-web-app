@@ -2,7 +2,7 @@ import * as React from 'react';
 import SearchOutline from '../../../Icons/SearchOutline';
 import { Neutral } from '../../../../constants/colors';
 import { Body2 } from '../../../Text';
-import { FAKE_LIST_USER, LOGO_IMAGE_WHITE } from '../../../../constants/constant';
+import { FAKE_LIST_USER, LOGO_IMAGE_WHITE, LS_ACCESS_TOKEN } from '../../../../constants/constant';
 import UserMenu from './UserMenu';
 import Search from 'antd/es/input/Search';
 import ChatService from '../../../../services/chatServices';
@@ -10,6 +10,7 @@ import axios, { AxiosError } from 'axios';
 import { TUserInfo } from '../../../../constants/types';
 import { Select, SelectProps } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import http from '../../../../http-common';
 
 interface IHeaderBarProps {
 }
@@ -30,19 +31,26 @@ const HeaderBar: React.FunctionComponent<IHeaderBarProps> = (props) => {
 
     React.useEffect(() => {
         const interval = setTimeout(async () => {
-            if (searchText.trim() !== '' && searchText.length >= 3) {
+            if (searchText.trim() !== '') {
                 try {
                     //search by name
-                    // const result = await ChatService.searchFriend({ text: searchText })
+                    const result = await ChatService.searchFriend({ usernameOrNickname: searchText })
+                    // console.log("----result: ", result)
                     // setFriends(result.data)
-                    const result = FAKE_LIST_USER
-                    const converted = result.map((i) => {
-                        return {
-                            label: i.username,
-                            value: i.userId
-                        }
-                    })
-                    console.log("----", converted)
+                    // const result = FAKE_LIST_USER
+                    // const converted = result.data.data.map((i) => {
+                    //     return {
+                    //         label: i.nickname,
+                    //         value: i.username
+                    //     }
+                    // })
+                    const data = result.data.data
+                    // console.log("----data: ", data)
+                    const converted = [{
+                        label: data.nickname,
+                        value: data.username
+                    }]
+                    // console.log("----", converted)
                     setFriends(converted)
                 } catch (error: any | AxiosError) {
                     if (axios.isAxiosError(error)) {
@@ -77,7 +85,7 @@ const HeaderBar: React.FunctionComponent<IHeaderBarProps> = (props) => {
                         value={choose}
                         placeholder={"Search friends"}
                         defaultActiveFirstOption={false}
-                        suffixIcon={<SearchOutlined style={{fontSize: '16px'}}/>}
+                        suffixIcon={<SearchOutlined style={{ fontSize: '16px' }} />}
                         filterOption={false}
                         onSearch={onChange}
                         onChange={handleChange}
