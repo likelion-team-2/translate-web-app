@@ -176,6 +176,8 @@ export type TMessageData = {
   date: Date
   status: 'waiting' | 'sent' | 'received' | 'read'
   text: string
+  textVi: string
+  textKo: string
   userId: string
 }
 
