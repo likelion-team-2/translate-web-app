@@ -73,7 +73,9 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
             date: messageReponse.createdAt,
             messageId: messageReponse.id,
             status: 'sent',
-            text: messageReponse.content, // TODO: When translated let use contentVi and contentKo
+            text: messageReponse.content,
+            textVi: messageReponse.contentVi,
+            textKo: messageReponse.contentKo,
             userId: userInfo?.user.userId
           },
           design: {
@@ -99,7 +101,9 @@ const ChatBox: React.FunctionComponent<IChatBoxProps> = (props) => {
             date: messageReponse.createdAt,
             messageId: messageReponse.id,
             status: 'received',
-            text: messageReponse.content, // TODO: When translated let use contentVi and contentKo
+            text: messageReponse.content,
+            textVi: messageReponse.contentVi,
+            textKo: messageReponse.contentKo,
             userId: selectedUser.user.userId
           },
           design: {

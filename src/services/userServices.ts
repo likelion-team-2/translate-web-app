@@ -1,5 +1,5 @@
 
-import { TUserChangePassInput, TUserCreateInput, TUserCreateOutput, TUserInfo, TUserLoginInput, IUserLoginOutput, TUserUpdateInput, TSendOtpInput, TSendOtpOutput, TVerifyOtpInput, TVerifyOtpOutput } from "../constants/types";
+import { TUserChangePassInput, TUserCreateInput, TUserCreateOutput, TUserInfo, TUserLoginInput, IUserLoginOutput, TUserUpdateInput, TSendOtpInput, TSendOtpOutput, TVerifyOtpInput, TVerifyOtpOutput, TAllUsersOutput } from "../constants/types";
 import { http } from "../http-common";
 
 const get = (identifier: string) => {
@@ -29,6 +29,11 @@ const verifyOtpAndChangePw = (data: TVerifyOtpInput) => {
 const changePassword = (input: TUserChangePassInput) => {
   return http.patch<TUserChangePassInput, TUserCreateOutput>("/v1/api/user/changepassword", input);
 };
+
+const getAllUsers = () => {
+  return http.get<any, TAllUsersOutput>("v1/api/user/getall");
+};
+
 const UserService
  = {
   login,
@@ -38,6 +43,7 @@ const UserService
   changePassword,
   sendOtp,
   verifyOtpAndChangePw,
+  getAllUsers
 };
 
 export default UserService;

@@ -22,7 +22,7 @@ instance.interceptors.request.use(
     const token = localStorage.getItem(LS_ACCESS_TOKEN);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
-      console.log("config: ", config.headers)
+      // console.log("config: ", config.headers)
     }
     return config;
   },

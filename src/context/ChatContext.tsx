@@ -46,30 +46,41 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     setMessageDesign(convertData)
   }, [messageData, userInfo])
 
-  const getSessionId = async () => {
-    if (!selectedUser) return
+
+  const getMessage = async () => {
+    setMessageData([])
+    if (!selectedUser || !userInfo) return
     try {
-      const result = await ChatService.getSessionId({ friendId: selectedUser?.user.userId })
-      if (result) {
-        navigate(PAGE_CHAT_SESSION + "/" + result.data.id)
+      const result = await ChatService.getMessages({ username: userInfo.user.username, friend: selectedUser?.user.username });
+      const sessionId = result?.data?.data?.sessionId;
+      const messages = result?.data?.data?.messages;
+      if (sessionId) {
+        navigate(PAGE_CHAT_SESSION + "/" + sessionId)
+      }
+      if (messages) {
+        const messageData = messages.map(m => {
+          return {
+            messageId: m.id,
+            date: new Date(),
+            status: "received",
+            text: m.content,
+            textVi: m.contentVi,
+            textKo: m.contentKo,
+            userId: m.sender
+          } as TMessageData
+        })
+        setMessageData(messageData);
       }
     } catch (error) {
 
     }
   }
 
-  const getMessage = () => {
-    setMessageData([])
-    setMessageData(FAKE_MESSAGE)
-  }
-
   React.useEffect(() => {
-    if (selectedUser) {
-      // getSessionId()
-      getMessage()
-      navigate(PAGE_CHAT_SESSION + "/" + 1)
+    if (selectedUser && userInfo) {
+      getMessage();
     }
-  }, [selectedUser])
+  }, [selectedUser, userInfo])
 
   React.useMemo(()=>{
     if (!isReload) return

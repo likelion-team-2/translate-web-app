@@ -9,16 +9,22 @@ export interface ITestPostData {
   body: string,
 }
 
-export type TGetSessionIdInput = {
-  friendId: string
+export type TGetMessagesInput = {
+  username: string
+  friend: string
 }
 
 export type TSession = {
   id: number
 }
 
-export type TGetSessionIdOutput = {
-  data: TSession
+export type TGetMessagesOutput = {
+  data: {
+    data: {
+      sessionId: string
+      messages: Array<TMessageResponse>
+    }
+  }
 }
 
 export type TGetFriendInput = {
@@ -27,6 +33,10 @@ export type TGetFriendInput = {
 
 export type TGetFriendOutput = {
   data: { data: TUserInfo }
+}
+
+export type TAllUsersOutput = {
+  data: { data: Array<TUserInfo> }
 }
 
 export type TUserDesign = {
@@ -176,6 +186,8 @@ export type TMessageData = {
   date: Date
   status: 'waiting' | 'sent' | 'received' | 'read'
   text: string
+  textVi: string
+  textKo: string
   userId: string
 }
 

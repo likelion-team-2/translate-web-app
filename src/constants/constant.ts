@@ -68,6 +68,7 @@ export const OTP_TITLE = 'Please enter OTP here'
 export const CHANGE_PW_WRONG_OTP_TEXT = 'Incorrect OTP. Please try again.'
 export const CHANGE_PW_WRONG_OTP_PLACEHOLDER = 'Ex: 123456'
 export const PAGE_CHAT_SESSION = "/chat"
+export const SUPPORT_LANGUAGE = ["Vietnamese", "Korean"];
 
 export const FAKE_LIST_USER: TUserInfo[] = [
     {
@@ -120,6 +121,8 @@ export const FAKE_MESSAGE: TMessageData[] = [
         date: new Date("2024-07-05T03:24:00"),
         status: 'sent',
         text: 'Tin nhan 1',
+        textVi: 'Tin nhan 1',
+        textKo: '소식 1',
         userId: 'id1'
     },
     {
@@ -127,6 +130,8 @@ export const FAKE_MESSAGE: TMessageData[] = [
         date: new Date("2024-07-05T03:25:00"),
         status: 'sent',
         text: 'Tin nhan 2',
+        textVi: 'Tin nhan 2',
+        textKo: '소식 2',
         userId: 'id2'
     },
     {
@@ -134,6 +139,8 @@ export const FAKE_MESSAGE: TMessageData[] = [
         date: new Date("2024-07-05T03:26:00"),
         status: 'sent',
         text: 'Tin nhan 3',
+        textVi: 'Tin nhan 3',
+        textKo: '소식 3',
         userId: 'id1'
     },
     {
@@ -141,6 +148,8 @@ export const FAKE_MESSAGE: TMessageData[] = [
         date: new Date("2024-07-05T03:27:00"),
         status: 'sent',
         text: 'Tin nhan 4',
+        textVi: 'Tin nhan 4',
+        textKo: '소식 4',
         userId: 'id2'
     },
     {
@@ -148,6 +157,8 @@ export const FAKE_MESSAGE: TMessageData[] = [
         date: new Date("2024-07-05T03:26:00"),
         status: 'sent',
         text: 'Tin nhan 5',
+        textVi: 'Tin nhan 5',
+        textKo: '소식 5',
         userId: 'id1'
     },
     {
@@ -155,64 +166,10 @@ export const FAKE_MESSAGE: TMessageData[] = [
         date: new Date("2024-07-05T03:27:00"),
         status: 'sent',
         text: 'Tin nhan 6',
+        textVi: 'Tin nhan 6',
+        textKo: '소식 6',
         userId: 'id2'
-    },
-    {
-        messageId: 7,
-        date: new Date("2024-07-05T03:26:00"),
-        status: 'sent',
-        text: 'Tin nhan 7',
-        userId: 'id1'
-    },
-    {
-        messageId: 8,
-        date: new Date("2024-07-05T03:27:00"),
-        status: 'sent',
-        text: 'Tin nhan 8',
-        userId: 'id2'
-    },
-    {
-        messageId: 9,
-        date: new Date("2024-07-05T03:26:00"),
-        status: 'sent',
-        text: 'Tin nhan 9',
-        userId: 'id1'
-    },
-    {
-        messageId: 10,
-        date: new Date("2024-07-05T03:27:00"),
-        status: 'sent',
-        text: 'Tin nhan 10',
-        userId: 'id2'
-    },
-    {
-        messageId: 11,
-        date: new Date("2024-07-05T03:26:00"),
-        status: 'sent',
-        text: 'Tin nhan 11',
-        userId: 'id1'
-    },
-    {
-        messageId: 12,
-        date: new Date("2024-07-05T03:27:00"),
-        status: 'sent',
-        text: 'Tin nhan 12',
-        userId: 'id2'
-    },
-    {
-        messageId: 13,
-        date: new Date("2024-07-05T03:26:00"),
-        status: 'sent',
-        text: 'Tin nhan 13',
-        userId: 'id1'
-    },
-    {
-        messageId: 14,
-        date: new Date("2024-07-05T03:27:00"),
-        status: 'sent',
-        text: 'Tin nhan 14',
-        userId: 'id2'
-    },
+    }
 ] 
 
 export const FAKE_USER_INFO: TUserLogin = {
