@@ -1,19 +1,19 @@
 
-import { TGetFriendInput, TGetFriendOutput, TGetSessionIdInput, TGetSessionIdOutput, TUserInfo } from "../constants/types";
+import { TGetFriendInput, TGetFriendOutput, TGetMessagesInput, TGetMessagesOutput } from "../constants/types";
 import { http } from "../http-common";
 
 const searchFriend = (input: TGetFriendInput) => {
   return http.get<TGetFriendInput, TGetFriendOutput>(`v1/api/user/getuser?usernameOrNickname=${input.usernameOrNickname}`);
 };
 
-const getSessionId = (input: TGetSessionIdInput) => {
-  return http.get<TGetSessionIdInput, TGetSessionIdOutput>(`v1/api/chat/get/sessionId/${input.friendId}`);
+const getMessages = (input: TGetMessagesInput) => {
+  return http.get<TGetMessagesInput, TGetMessagesOutput>(`v1/api/messages/?username=${input.username}&friend=${input.friend}`);
 };
 
 const ChatService
   = {
   searchFriend,
-  getSessionId,
+  getMessages,
 };
 
 export default ChatService;

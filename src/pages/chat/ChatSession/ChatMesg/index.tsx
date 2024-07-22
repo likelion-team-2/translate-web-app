@@ -17,6 +17,8 @@ const ChatMesg: React.FunctionComponent<IChatMesgProps> = ({ input }) => {
             setText(input.data.textVi);
         } else if (language === eRegion.KR) { 
             setText(input.data.textKo);
+        } else {
+            setText(input.data.text);
         }
     }, [input.data.textKo, input.data.textVi, language])
 

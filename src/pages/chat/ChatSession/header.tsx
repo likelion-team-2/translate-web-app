@@ -12,13 +12,22 @@ interface IChatHeaderProps {
 
 const ChatHeader: React.FunctionComponent<IChatHeaderProps> = ({ user }) => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const languages = [...regions, {
+        value: "Default",
+        label: "Default",
+    }];
 
     const updateQueryString = (key: string, value: string) => {
         searchParams.set(key, value);
         setSearchParams(searchParams);
       };
     const handleChangeLanguage = (e: any) => {
-        updateQueryString("language", e)
+        if (e === "Default") {
+            searchParams.delete("language");
+            setSearchParams(searchParams);
+        } else {
+            updateQueryString("language", e)
+        }
     }
 
     return <>
@@ -29,7 +38,7 @@ const ChatHeader: React.FunctionComponent<IChatHeaderProps> = ({ user }) => {
                 placeholder={"Choose Language"}
                 optionFilterProp="label"
                 onChange={handleChangeLanguage}
-                options={regions}
+                options={languages}
                 className='mb-[0.5rem] h-[3rem]'
                 labelRender={(i) => {
                     return <Body3 className='text-[18px]'>{i.value}</Body3>

@@ -4,21 +4,25 @@ import { Neutral } from '../../../../constants/colors';
 import { Body2 } from '../../../Text';
 import { FAKE_LIST_USER, LOGO_IMAGE_WHITE, LS_ACCESS_TOKEN } from '../../../../constants/constant';
 import UserMenu from './UserMenu';
-import Search from 'antd/es/input/Search';
 import ChatService from '../../../../services/chatServices';
 import axios, { AxiosError } from 'axios';
-import { TUserInfo } from '../../../../constants/types';
+import { TUserInfoDesign } from '../../../../constants/types';
 import { Select, SelectProps } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import http from '../../../../http-common';
+import { ChatContext } from '../../../../context/ChatContext';
+import { randomColor } from '../../../../utils/helper';
+import { AuthContext } from '../../../../context/AuthContext';
 
 interface IHeaderBarProps {
 }
 
 const HeaderBar: React.FunctionComponent<IHeaderBarProps> = (props) => {
+    const { userInfo } = React.useContext(AuthContext)!;
     const [searchText, setSearchText] = React.useState<string>('');
     const [friends, setFriends] = React.useState<SelectProps['options']>([]);
     const [choose, setChoose] = React.useState<string>();
+    const [userSelect, setUserSelect] = React.useState<TUserInfoDesign | null>(null);
+    const {setSelectedUser} = React.useContext(ChatContext)!
 
     const onChange = (value: string) => {
         const currText = value
@@ -27,6 +31,7 @@ const HeaderBar: React.FunctionComponent<IHeaderBarProps> = (props) => {
 
     const handleChange = (newValue: string) => {
         setChoose(newValue);
+        setSelectedUser(userSelect);
     };
 
     React.useEffect(() => {
@@ -34,24 +39,22 @@ const HeaderBar: React.FunctionComponent<IHeaderBarProps> = (props) => {
             if (searchText.trim() !== '') {
                 try {
                     //search by name
-                    const result = await ChatService.searchFriend({ usernameOrNickname: searchText })
-                    // console.log("----result: ", result)
-                    // setFriends(result.data)
-                    // const result = FAKE_LIST_USER
-                    // const converted = result.data.data.map((i) => {
-                    //     return {
-                    //         label: i.nickname,
-                    //         value: i.username
-                    //     }
-                    // })
+                    const result = await ChatService.searchFriend({ usernameOrNickname: searchText });
                     const data = result.data.data
-                    // console.log("----data: ", data)
-                    const converted = [{
-                        label: data.nickname,
-                        value: data.username
-                    }]
-                    // console.log("----", converted)
-                    setFriends(converted)
+
+                    if (data.username !== userInfo?.user?.username) {
+                        setUserSelect({
+                        user: data,
+                        design: {
+                            color: randomColor()
+                        }});
+                        const converted = [{
+                            label: data.nickname,
+                            value: data.username
+                        }]
+                        // console.log("----", converted)
+                        setFriends(converted)
+                    }
                 } catch (error: any | AxiosError) {
                     if (axios.isAxiosError(error)) {
                         //   setIsEnable(false)
